@@ -1,0 +1,38 @@
+{
+  "name": "ssbutools-api",
+  "version": "0.0.0",
+  "description": "RESTful API providing data related to Super Smash Bros. Ultimate assets, e.g. stages and characters",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "node ./server/bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmirville/ssbu-api.git"
+  },
+  "keywords": [
+    "javascript",
+    "js",
+    "nodejs",
+    "node-js",
+    "mongodb",
+    "rest",
+    "api",
+    "super-smash-bros-ultimate",
+    "super-smash-bros"
+  ],
+  "author": "Raynald Mirville",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rmirville/ssbu-api/issues"
+  },
+  "homepage": "https://github.com/rmirville/ssbu-api#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "mongodb": "^3.6.1",
+    "morgan": "~1.9.1"
+  }
+}
