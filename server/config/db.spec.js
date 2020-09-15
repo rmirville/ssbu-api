@@ -46,6 +46,14 @@ describe('Database Config', () => {
       expect(dbConfig.hostname.length).toBeGreaterThan(0);
     });
 
+    it('should not change', () => {
+      let fakeHost = ['ibTS0f2GX5', '5JIWTyS8eO'];
+      dbConfig.hostname = fakeHost[0];
+      expect(dbConfig.hostname === fakeHost[0]).toBe(false);
+      dbConfig.hostname = fakeHost[1];
+      expect(dbConfig.hostname === fakeHost[1]).toBe(false);
+    });
+
   });
 
   describe('port', () => {
@@ -56,6 +64,14 @@ describe('Database Config', () => {
   
     it('should be either null or of type number', () => {
       expect((dbConfig.port instanceof Number) || (dbConfig.port === null)).toBe(true);
+    });
+
+    it('should not change', () => {
+      let fakePort = ['ibTS0f2GX5', '5JIWTyS8eO'];
+      dbConfig.port = fakePort[0];
+      expect(dbConfig.port === fakePort[0]).toBe(false);
+      dbConfig.port = fakePort[1];
+      expect(dbConfig.port === fakePort[1]).toBe(false);
     });
 
   });
@@ -74,6 +90,14 @@ describe('Database Config', () => {
       expect(dbConfig.dbname.length).toBeGreaterThan(0);
     });
 
+    it('should not change', () => {
+      let fakeDB = ['ibTS0f2GX5', '5JIWTyS8eO'];
+      dbConfig.dbname = fakeDB[0];
+      expect(dbConfig.dbname === fakeDB[0]).toBe(false);
+      dbConfig.dbname = fakeDB[1];
+      expect(dbConfig.dbname === fakeDB[1]).toBe(false);
+    });
+
   });
 
   describe('username', () => {
@@ -90,6 +114,14 @@ describe('Database Config', () => {
       expect(dbConfig.username.length).toBeGreaterThan(0);
     });
 
+    it('should not change', () => {
+      let fakeUser = ['ibTS0f2GX5', '5JIWTyS8eO'];
+      dbConfig.username = fakeUser[0];
+      expect(dbConfig.username === fakeUser[0]).toBe(false);
+      dbConfig.username = fakeUser[1];
+      expect(dbConfig.username === fakeUser[1]).toBe(false);
+    });
+
   });
 
   describe('secret', () => {
@@ -104,6 +136,14 @@ describe('Database Config', () => {
 
     it('should not be empty', () => {
       expect(dbConfig.secret.length).toBeGreaterThan(0);
+    });
+
+    it('should not change', () => {
+      let fakeSecret = ['ibTS0f2GX5', '5JIWTyS8eO'];
+      dbConfig.secret = fakeSecret[0];
+      expect(dbConfig.secret === fakeSecret[0]).toBe(false);
+      dbConfig.secret = fakeSecret[1];
+      expect(dbConfig.secret === fakeSecret[1]).toBe(false);
     });
 
   });
