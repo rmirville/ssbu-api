@@ -3,7 +3,7 @@ require('dotenv').config();
 const hostname = process.env.SSBUTOOLS_DB_MONGO_R_HOST;
 
 let portTemp = process.env.SSBUTOOLS_DB_MONGO_R_PORT;
-const port = (portTemp.length > 0) ? portTemp : null;
+const port = ((portTemp !== undefined) && (portTemp.length > 0)) ? portTemp : null;
 
 const dbname = process.env.SSBUTOOLS_DB_MONGO_R_DB;
 const username = process.env.SSBUTOOLS_DB_MONGO_R_USER;
