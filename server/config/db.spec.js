@@ -78,11 +78,11 @@ describe('Database Config', () => {
 
   describe('database name', () => {
 
-    it('should have a database name', () => {
+    it('should exist', () => {
       expect(dbConfig.hasOwnProperty('dbname')).toBe(true);
     });
   
-    it('should have a database name of type string', () => {
+    it('should be of type string', () => {
       expect(dbConfig.dbname).toBeInstanceOf(String);
     });
 
@@ -102,11 +102,11 @@ describe('Database Config', () => {
 
   describe('username', () => {
 
-    it('should have a username', () => {
+    it('should exist', () => {
       expect(dbConfig.hasOwnProperty('username')).toBe(true);
     });
   
-    it('should have a username of type string', () => {
+    it('should be of type string', () => {
       expect(dbConfig.username).toBeInstanceOf(String);
     });
 
@@ -126,11 +126,11 @@ describe('Database Config', () => {
 
   describe('secret', () => {
 
-    it('should have a secret', () => {
+    it('should exist', () => {
       expect(dbConfig.hasOwnProperty('secret')).toBe(true);
     });
   
-    it('should have a secret of type string', () => {
+    it('should be of type string', () => {
       expect(dbConfig.secret).toBeInstanceOf(String);
     });
 
@@ -144,6 +144,30 @@ describe('Database Config', () => {
       expect(dbConfig.secret === fakeSecret[0]).toBe(false);
       dbConfig.secret = fakeSecret[1];
       expect(dbConfig.secret === fakeSecret[1]).toBe(false);
+    });
+
+  });
+
+  describe('type', () => {
+
+    it('should have a database type', () => {
+      expect(dbConfig.hasOwnProperty('type')).toBe(true);
+    });
+  
+    it('should be of type string', () => {
+      expect(dbConfig.type).toBeInstanceOf(String);
+    });
+
+    it('should not be empty', () => {
+      expect(dbConfig.type.length).toBeGreaterThan(0);
+    });
+
+    it('should not change', () => {
+      let fakeType = ['ibTS0f2GX5', '5JIWTyS8eO'];
+      dbConfig.type = fakeType[0];
+      expect(dbConfig.type === fakeType[0]).toBe(false);
+      dbConfig.type = fakeType[1];
+      expect(dbConfig.type === fakeType[1]).toBe(false);
     });
 
   });
