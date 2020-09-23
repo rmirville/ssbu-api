@@ -63,7 +63,7 @@ describe('Database Config', () => {
     });
   
     it('should be either null or of type number', () => {
-      expect((dbConfig.port instanceof Number) || (dbConfig.port === null)).toBe(true);
+      expect((typeof dbConfig.port === 'number') || (dbConfig.port === null)).toBe(true);
     });
 
     it('should not change', () => {
