@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 class DBService {
   constructor() { }
 
-  static connect(type, hostname, port, dbname, username, secret) {
+  static connect(type, info) {
 
     try {
-      this._validateParams(type, hostname, port, dbname, username, secret)
+      this._validateParams(type, info)
     } catch (err) {
       return new Promise(
         (resolve, reject) => {
@@ -15,30 +15,30 @@ class DBService {
       )
     }
 
-    return this._connectMongo(hostname, dbname, username, secret);
+    return this._connectMongo(info);
   }
 
-  static _connectMongo(hostname, dbname, username, secret) {
-    const urlPrefix = `mongodb+srv://${username}:${secret}@${hostname}`;
+  static _connectMongo(info) {
+    const urlPrefix = `mongodb+srv://${info.username}:${info.secret}@${info.hostname}`;
 
-    const urlSuffix = `/${dbname}?retryWrites=true&w=majority`;
+    const urlSuffix = `/${info.dbname}?retryWrites=true&w=majority`;
 
     const url = urlPrefix + urlSuffix;
     return mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
   }
 
-  static _validateParams(type, hostname, port, dbname, username, secret) {
-    const stringParams = {type, hostname, dbname, username, secret};
+  static _validateParams(type, info) {
+    const stringParams = {type, hostname: info.hostname, dbname: info.dbname, username: info.username, secret: info.secret};
 
     for (const param in stringParams) {
       if (stringParams.hasOwnProperty(param)) {
-        if (typeof stringParams[param] !== 'string') {
+        if ((typeof stringParams[param] === 'undefined') || (typeof stringParams[param] !== 'string')) {
           throw new TypeError(`${param} is not of type string`);
         }
       }
     }
 
-    if ((typeof port !== 'number') && (port !== null)) {
+    if ((typeof info.port !== 'number') && (info.port !== null)) {
       throw new TypeError('port is neither null or of type number');
     }
   }
