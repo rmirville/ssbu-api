@@ -38,8 +38,8 @@ class DBService {
       }
     }
 
-    if ((typeof info.port !== 'number') && (info.port !== null)) {
-      throw new TypeError('port is neither null or of type number');
+    if ((typeof info.port !== 'number') && (typeof info.port !== 'string') && (info.port !== false)) {
+      throw new TypeError('port is neither a string, a number, nor false');
     }
   }
 }

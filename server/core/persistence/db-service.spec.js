@@ -65,7 +65,7 @@ describe('DBService -', () => {
 
           await DBService.connect(badArgs.type, badArgs.info).then(
             value => {
-              fail('connect() should throw an exception');
+              fail('connect() should throw an error');
             },
             err => {
               expect(err).toBeInstanceOf(TypeError);
@@ -82,7 +82,7 @@ describe('DBService -', () => {
 
           await DBService.connect(badArgs.type, badArgs.info).then(
             value => {
-              fail('connect() should throw an exception');
+              fail('connect() should throw an error');
             },
             err => {
               expect(err).toBeInstanceOf(TypeError);
@@ -93,13 +93,47 @@ describe('DBService -', () => {
           });
         });
 
-        it('should reject a non-number/null port', async () => {
-          /// console.group('\n=== SPEC - connect validation - reject port type');
-          let badArgs = {type, info: {hostname, port: '3000', dbname, username, secret}};
+        it('should reject a null port', async () => {
+          /// console.group('\n=== SPEC - connect validation - reject port type null');
+          let badArgs = {type, info: {hostname, port: null, dbname, username, secret}};
 
           await DBService.connect(badArgs.type, badArgs.info).then(
             value => {
-              fail('connect() should throw an exception');
+              fail('connect() should throw an error');
+            },
+            err => {
+              expect(err).toBeInstanceOf(TypeError);
+            }
+          ).then(
+            () => {
+              /// console.groupEnd();
+          });
+        });
+
+        it('should reject a true port', async () => {
+          /// console.group('\n=== SPEC - connect validation - reject port type true');
+          let badArgs = {type, info: {hostname, port: true, dbname, username, secret}};
+
+          await DBService.connect(badArgs.type, badArgs.info).then(
+            value => {
+              fail('connect() should throw an error');
+            },
+            err => {
+              expect(err).toBeInstanceOf(TypeError);
+            }
+          ).then(
+            () => {
+              /// console.groupEnd();
+          });
+        });
+
+        it('should reject an object port', async () => {
+          /// console.group('\n=== SPEC - connect validation - reject port type');
+          let badArgs = {type, info: {hostname, port: {several: 'potatoes'}, dbname, username, secret}};
+
+          await DBService.connect(badArgs.type, badArgs.info).then(
+            value => {
+              fail('connect() should throw an error');
             },
             err => {
               expect(err).toBeInstanceOf(TypeError);
@@ -116,7 +150,7 @@ describe('DBService -', () => {
 
           await DBService.connect(badArgs.type, badArgs.info).then(
             value => {
-              fail('connect() should throw an exception');
+              fail('connect() should throw an error');
             },
             err => {
               expect(err).toBeInstanceOf(TypeError);
@@ -133,7 +167,7 @@ describe('DBService -', () => {
 
           await DBService.connect(badArgs.type, badArgs.info).then(
             value => {
-              fail('connect() should throw an exception');
+              fail('connect() should throw an error');
             },
             err => {
               expect(err).toBeInstanceOf(TypeError);
@@ -150,7 +184,7 @@ describe('DBService -', () => {
 
           await DBService.connect(badArgs.type, badArgs.info).then(
             value => {
-              fail('connect() should throw an exception');
+              fail('connect() should throw an error');
             },
             err => {
               expect(err).toBeInstanceOf(TypeError);

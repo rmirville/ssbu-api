@@ -1,9 +1,9 @@
 require('dotenv').config();
 
-const hostname = process.env.SSBUTOOLS_API_HOST;
+const { normalizePort } = require('../shared/utility/network');
 
-let portTemp = process.env.SSBUTOOLS_API_PORT;
-const port = ((typeof portTemp !== 'undefined') && (portTemp.length > 0)) ? portTemp : null;
+const hostname = process.env.SSBUTOOLS_API_HOST;
+const port = normalizePort(process.env.SSBUTOOLS_API_PORT);
 
 const serverConfig = {hostname, port};
 Object.freeze(serverConfig);

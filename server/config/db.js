@@ -1,9 +1,10 @@
 require('dotenv').config();
 
+const { normalizePort } = require('../shared/utility/network');
+
 const hostname = process.env.SSBUTOOLS_DB_MONGO_R_HOST;
 
-let portTemp = process.env.SSBUTOOLS_DB_MONGO_R_PORT;
-const port = ((typeof portTemp !== 'undefined') && (portTemp.length > 0)) ? parseInt(portTemp) : null;
+const port = normalizePort(process.env.SSBUTOOLS_DB_MONGO_R_PORT);
 
 const dbname = process.env.SSBUTOOLS_DB_MONGO_R_DB;
 const username = process.env.SSBUTOOLS_DB_MONGO_R_USER;

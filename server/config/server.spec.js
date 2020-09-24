@@ -31,8 +31,8 @@ describe('Server Config', () => {
       expect(serverConfig.hasOwnProperty('port')).toBe(true);
     });
   
-    it('should be either null or of type number', () => {
-      expect((serverConfig.port instanceof Number) || (serverConfig.port === null)).toBe(true);
+    it('should be either type number, string, or false', () => {
+      expect((typeof serverConfig.port === 'number') || (typeof serverConfig.port === 'string') || (serverConfig.port === false)).toBe(true);
     });
 
     it('should not change', () => {

@@ -62,8 +62,8 @@ describe('Database Config', () => {
       expect(dbConfig.hasOwnProperty('port')).toBe(true);
     });
   
-    it('should be either null or of type number', () => {
-      expect((typeof dbConfig.port === 'number') || (dbConfig.port === null)).toBe(true);
+    it('should be either type number, string, or false', () => {
+      expect((typeof dbConfig.port === 'number') || (typeof serverConfig.port === 'string') || (serverConfig.port === false)).toBe(true);
     });
 
     it('should not change', () => {
