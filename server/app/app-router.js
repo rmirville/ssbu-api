@@ -1,9 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const apiRouter = require('../features/api/api-router');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send(null);
-});
-
-module.exports = router;
+const init = (server) => {
+    server.get('*', function (req, res, next) {
+        console.log('Request was made to: ' + req.originalUrl);
+        return next();
+    });
+    
+    server.use('/api', apiRouter);
+}
+module.exports = {
+    init: init
+};
