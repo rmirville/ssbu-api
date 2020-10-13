@@ -5,6 +5,7 @@ const http = require('http');
 const logger = require('morgan');
 const path = require('path');
 
+const { normalizePort } = require('../shared/utility/network');
 const { DBService } = require('./persistence/db-service');
 
 class App {
@@ -12,19 +13,10 @@ class App {
   db;
   server;
   router;
+  serverConfig;
+  dbConfig;
 
-  constructor() {
-    if (App.instance) {
-      return App.instance;
-    }
-    else {
-      App.instance = {
-        create: this.create,
-        start: this.start
-      };
-      return App.instance;
-    }
-  }
+  constructor() { }
 
   create(serverConfig, dbConfig) {
     this.expApp = express();
@@ -34,10 +26,10 @@ class App {
     this.expApp.use(express.json());
     this.expApp.use(express.urlencoded({ extended: false }));
     this.expApp.use(cookieParser());
-    this.expApp.use(express.static(path.join(__dirname, '../public')));
+    this.expApp.use(express.static(path.join(__dirname, '../../public')));
 
     // get port from environment and store in Express
-    const serverPort = this._normalizePort(serverConfig.port.toString() || '3000');
+    const serverPort = normalizePort(serverConfig.port.toString() || '3000');
     this.expApp.set('port', serverPort);
 
     // create http server
@@ -51,26 +43,35 @@ class App {
       secret: dbConfig.secret,
     }
 
+    this.dbConfig = dbConfig;
+    this.serverConfig = serverConfig;
+
     // connect to database
     this.db = DBService.connect(dbConfig.type, dbInfo);
 
     // import routes
-    router.init(this.expApp);
+    this.router.init(this.expApp);
   }
 
   /**
    * Listen on provided port, on all network interfaces.
    */
   start() {
-    this.server.listen(port);
-    this.server.on('error', this._onError);
-    this.server.on('listening', this._onListening);
+    const port = normalizePort(this.serverConfig.port);
+    if (port) {
+      this.server.listen(port);
+    }
+    else {
+      this.server.listen();
+    }
+    this.server.on('error', e => { this._onError(e); });
+    this.server.on('listening', () => { this._onListening(); });
   }
 
   /**
    * Event listener for http server "error" event.
    */
-  _onError(error) {
+  _onError = function(error) {
     if (error.syscall !== 'listen') {
       throw error;
     }
@@ -92,22 +93,20 @@ class App {
       default:
         throw error;
     }
-  }
+  };
   
   /**
    * Event listener for HTTP server "listening" event.
    */
-  _onListening() {
-    var addr = server.address();
+  _onListening = function() {
+    var addr = this.server.address();
     var bind = typeof addr === 'string'
       ? 'pipe ' + addr
       : 'port ' + addr.port;
     debug('Listening on ' + bind);
-  }
+  };
 }
 
 const app = new App();
-
-Object.freeze(app);
 
 module.exports = app;
