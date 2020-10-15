@@ -19,6 +19,8 @@ class App {
   constructor() { }
 
   create(serverConfig, dbConfig) {
+    this._validateParams(serverConfig, dbConfig);
+
     this.expApp = express();
     this.router = require('./app-router');
     
@@ -29,22 +31,34 @@ class App {
     this.expApp.use(express.static(path.join(__dirname, '../../public')));
 
     // get port from environment and store in Express
-    const serverPort = normalizePort(serverConfig.port.toString() || '3000');
+    const serverPort = normalizePort(serverConfig.port) || 3000;
     this.expApp.set('port', serverPort);
 
     // create http server
     this.server = http.createServer(this.expApp);
 
+    // get database info from environment and connect to database
+    const dbPort = normalizePort(dbConfig.port);
     const dbInfo = {
       hostname: dbConfig.hostname,
-      port: dbConfig.port,
+      port: dbPort,
       dbname: dbConfig.dbname,
       username: dbConfig.username,
-      secret: dbConfig.secret,
-    }
+      secret: dbConfig.secret
+    };
 
-    this.dbConfig = dbConfig;
-    this.serverConfig = serverConfig;
+    this.dbConfig = {
+      type: dbConfig.type,
+      port: dbPort,
+      dbname: dbConfig.dbname,
+      username: dbConfig.username,
+      secret: dbConfig.secret
+    };
+
+    this.serverConfig = {
+      hostname: serverConfig.hostname,
+      port: serverPort
+    };
 
     // connect to database
     this.db = DBService.connect(dbConfig.type, dbInfo);
@@ -105,6 +119,22 @@ class App {
       : 'port ' + addr.port;
     debug('Listening on ' + bind);
   };
+
+  _validateParams(serverConfig, dbConfig) {
+    const stringDbParams = {type: dbConfig.type, hostname: dbConfig.hostname, dbname: dbConfig.dbname, username: dbConfig.username, secret: dbConfig.secret};
+
+    for (const param in stringDbParams) {
+      if (stringDbParams.hasOwnProperty(param)) {
+        if ((typeof stringDbParams[param] === 'undefined') || (typeof stringDbParams[param] !== 'string')) {
+          throw new TypeError(`Database ${param} is not of type string`);
+        }
+      }
+    }
+
+    if ((typeof serverConfig.hostname === 'undefined') || (typeof serverConfig.hostname !== 'string')) {
+      throw new TypeError(`Server hostname is not of type string`);
+    }
+  }
 }
 
 const app = new App();

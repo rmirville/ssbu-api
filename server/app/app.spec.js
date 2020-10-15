@@ -16,6 +16,7 @@ describe('App -', () => {
   const svrHostname = process.env.SSBUTOOLS_API_HOST;
   let svrPortTemp = process.env.SSBUTOOLS_API_PORT;
   const svrPort = ((typeof svrPortTemp !== 'undefined') && (svrPortTemp.length > 0)) ? parseInt(svrPortTemp) : null;
+  const defaultSvrPort = 3000;
 
   const dbConfig = {type: dbType, hostname: dbHostname, port: dbPort, dbname: dbname, username: dbUsername, secret: dbSecret};
   const svrConfig = {hostname: svrHostname, port: svrPort};
@@ -39,42 +40,27 @@ describe('App -', () => {
           /// console.groupEnd();
         });
   
-        it('should reject a null server port', async () => {
+        it('should convert a null server port to the default port', async () => {
           /// console.group('\n=== SPEC - create validation - reject port type null');
           const badArgs = {hostname: svrHostname, port: null};
-  
-          try {
-            app.create(badArgs, dbConfig);
-            fail('create() should throw an error');
-          } catch (err) {
-            expect(err).toBeInstanceOf(TypeError);
-          }
+          await app.create(badArgs, dbConfig);
+          expect(app.serverConfig.port).toEqual(defaultSvrPort);
           /// console.groupEnd();
         });
   
-        it('should reject a true server port', async () => {
+        it('should convert a true server port to the default port', async () => {
           /// console.group('\n=== SPEC - connect validation - reject port type true');
           const badArgs = {hostname: svrHostname, port: true};
-  
-          try {
-            app.create(badArgs, dbConfig);
-            fail('create() should throw an error');
-          } catch (err) {
-            expect(err).toBeInstanceOf(TypeError);
-          }
+          await app.create(badArgs, dbConfig);
+          expect(app.serverConfig.port).toEqual(defaultSvrPort);
           /// console.groupEnd();
         });
   
-        it('should reject an object server port', async () => {
+        it('should convert an Object server port to the default port', async () => {
           /// console.group('\n=== SPEC - connect validation - reject port type');
           const badArgs = {hostname: svrHostname, port: {several: 'potatoes'}};
-  
-          try {
-            app.create(badArgs, dbConfig);
-            fail('create() should throw an error');
-          } catch (err) {
-            expect(err).toBeInstanceOf(TypeError);
-          }
+          await app.create(badArgs, dbConfig);
+          expect(app.serverConfig.port).toEqual(defaultSvrPort);
           /// console.groupEnd();
         });
 
@@ -108,42 +94,27 @@ describe('App -', () => {
           /// console.groupEnd();
         });
   
-        it('should reject a null db port', async () => {
+        it('should convert a null db port to false', async () => {
           /// console.group('\n=== SPEC - create validation - reject port type null');
           const badArgs = {type: dbType, hostname: dbHostname, port: null, dbname, username: dbUsername, secret: dbSecret};
-  
-          try {
-            app.create(svrConfig, badArgs);
-            fail('create() should throw an error');
-          } catch (err) {
-            expect(err).toBeInstanceOf(TypeError);
-          }
+          await app.create(svrConfig, badArgs);
+          expect(app.dbConfig.port).toBe(false);
           /// console.groupEnd();
         });
   
-        it('should reject a true db port', async () => {
+        it('should convert a true db port to false', async () => {
           /// console.group('\n=== SPEC - connect validation - reject port type true');
           const badArgs = {type: dbType, hostname: dbHostname, port: true, dbname, username: dbUsername, secret: dbSecret};
-  
-          try {
-            app.create(svrConfig, badArgs);
-            fail('create() should throw an error');
-          } catch (err) {
-            expect(err).toBeInstanceOf(TypeError);
-          }
+          await app.create(svrConfig, badArgs);
+          expect(app.dbConfig.port).toBe(false);
           /// console.groupEnd();
         });
   
-        it('should reject an object db port', async () => {
+        it('should convert an object db port to false', async () => {
           /// console.group('\n=== SPEC - connect validation - reject port type');
           const badArgs = {type: dbType, hostname: dbHostname, port: {several: 'potatoes'}, dbname, username: dbUsername, secret: dbSecret};
-  
-          try {
-            app.create(svrConfig, badArgs);
-            fail('create() should throw an error');
-          } catch (err) {
-            expect(err).toBeInstanceOf(TypeError);
-          }
+          await app.create(svrConfig, badArgs);
+          expect(app.dbConfig.port).toBe(false);
           /// console.groupEnd();
         });
   

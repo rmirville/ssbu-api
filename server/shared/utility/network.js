@@ -5,7 +5,10 @@
 function normalizePort(val) {
   const port = parseInt(val, 10);
 
-  if ((val === undefined) || (val.length === 0)) {
+  if ((!val)
+    || (val === true)
+    || (typeof val === 'object')
+  ) {
     return false;
   }
 
