@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+JsonApi::register('default')->routes(function ($api) {
+    $api->resource('stage-classifications');
+    $api->resource('stage-piece-maps');
 });

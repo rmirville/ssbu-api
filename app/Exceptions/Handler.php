@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use CloudCreativity\LaravelJsonApi\Exceptions\HandlesErrors;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Neomerx\JsonApi\Exceptions\JsonApiException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -13,7 +15,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        JsonApiException::class,
     ];
 
     /**
@@ -34,8 +36,8 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function ($request, JsonApiException $e) {
+            return $this->prepareJsonApiException($e);
         });
     }
 }
