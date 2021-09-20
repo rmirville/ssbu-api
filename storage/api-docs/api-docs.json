@@ -1,0 +1,41 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "SSBUTools API",
+        "description": "RESTful API providing data related to Super Smash Bros. Ultimate assets",
+        "contact": {
+            "name": "Raynald Mirville",
+            "email": "admin@ssbutools.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/v1",
+            "description": "SSBUTools API Server"
+        }
+    ],
+    "paths": {
+        "/stages/classifications": {
+            "get": {
+                "summary": "Returns a list of stage classifications",
+                "description": "Returns a list of stage classifications",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Stage Classifications",
+            "description": "API Endpoints of Stage Classifications"
+        }
+    ],
+    "security": [
+        []
+    ]
+}

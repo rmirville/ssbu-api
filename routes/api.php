@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\StageClassificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-JsonApi::register('default')->routes(function ($api) {
-    $api->resource('stage-classifications');
-    $api->resource('stage-piece-maps');
+Route::group([
+  'prefix' => 'v1',
+  'namespace' => 'App\Http\Api\Controllers',
+], function () {
+  Route::apiResource('stages/classifications', 'StageClassificationController');
 });
