@@ -18,14 +18,65 @@
     "paths": {
         "/stages/classifications": {
             "get": {
-                "summary": "Returns a list of stage classifications",
-                "description": "Returns a list of stage classifications",
+                "summary": "Returns all stage classifications",
+                "description": "Returns all of stage classifications",
                 "operationId": "index",
                 "responses": {
                     "200": {
-                        "description": "successful operation"
+                        "description": "A list of all stage classifications",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/StageClassification"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error occured"
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StageClassification": {
+                "description": "The collection of descriptors of a stage",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "gameName": {
+                        "description": "The stage's in-code ID",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "The stage's name",
+                        "type": "string"
+                    },
+                    "abbr": {
+                        "description": "The stage's abbreviated name",
+                        "type": "string"
+                    },
+                    "series": {
+                        "description": "The stage's video game series of origin",
+                        "type": "string"
+                    },
+                    "tourneyPresence": {
+                        "description": "The stage's presence in major tournaments",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
             }
         }
     },

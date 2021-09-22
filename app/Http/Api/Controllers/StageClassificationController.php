@@ -17,16 +17,24 @@ class StageClassificationController extends Controller
     /**
      * @OA\Get(
      *      path="/stages/classifications",
-     *      summary="Returns a list of stage classifications",
-     *      description="Returns a list of stage classifications",
+     *      summary="Returns all stage classifications",
+     *      description="Returns all of stage classifications",
      *      operationId="index",
      *      @OA\Response(
      *          response=200,
-     *          description="successful operation",
-     *          @OA\Schema(
+     *          description="A list of all stage classifications",
+     *          @OA\JsonContent(
      *              type="object",
-     *              @OA\Items(ref="#/components/schemas/StageClassification"),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/StageClassification"),
+     *              ),
      *          ),
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="Unexpected error occured",
      *      ),
      * )
      */
