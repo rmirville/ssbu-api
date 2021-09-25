@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Log;
 
 class StageClassificationCollection extends ResourceCollection
 {
@@ -15,9 +16,16 @@ class StageClassificationCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
-            'links' => [
-                'self' => 'link-value',
+            '_links' => [
+                'self' => [
+                    'href' => env('SSBUTOOLS_API_HOST') . '/stages/classifications/',
+                ],
+            ],
+            '_embedded' => [
+                'classifications' => $this->collection->map(function ($item) {
+                        return $item->summary();
+                    }
+                ),
             ],
         ];
     }

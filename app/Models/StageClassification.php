@@ -10,8 +10,8 @@ class StageClassification extends Model
     use HasFactory;
 
     protected $connection = 'mongodb';
-    // protected $primaryKey = 'gameName';
-    // protected $keyType = 'string';
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
     public $incrementing = false;
     public $timestamps = false;
 }

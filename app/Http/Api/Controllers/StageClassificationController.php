@@ -17,12 +17,12 @@ class StageClassificationController extends Controller
     /**
      * @OA\Get(
      *      path="/stages/classifications",
-     *      summary="Returns all stage classifications",
+     *      summary="Returns an index of stage classifications",
      *      description="Returns all of stage classifications",
      *      operationId="index",
      *      @OA\Response(
      *          response=200,
-     *          description="A list of all stage classifications",
+     *          description="An index of all stage classifications",
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(

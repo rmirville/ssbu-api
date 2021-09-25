@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\StageClassificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-  'prefix' => 'v1',
+  'prefix' => 'v1/stages',
   'namespace' => 'App\Http\Api\Controllers',
 ], function () {
-  Route::apiResource('stages/classifications', 'StageClassificationController');
+  Route::resource('classifications', 'StageClassificationController')->only(['index', 'show']);
 });
