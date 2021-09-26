@@ -54,6 +54,44 @@ class StagePieceMapController extends Controller
         return new StagePieceMapCollection(StagePieceMap::all());
     }
 
+
+    /**
+     * @OA\Get(
+     *      path="/stages/piece-maps/{piece-map-name}",
+     *      summary="Returns a stage piece map",
+     *      description="Returns a mapping of stages to selected pieces",
+     *      operationId="getPieceMapByName",
+     *      @OA\Parameter(
+     *          name="piece-map-name",
+     *          in="path",
+     *          required=true,
+     *          description="Name of stage piece map",
+     *          @OA\Schema(
+     *              type="string"
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="A stage piece map",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="_links",
+     *                      ref="#/components/schemas/links",
+     *                  ),
+     *                  ref="#/components/schemas/stage_piece_map"),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="Unexpected error occured",
+     *      ),
+     * )
+     */
     public function show(StagePieceMap $pieceMap) {
         return new StagePieceMapResource($pieceMap);
     }

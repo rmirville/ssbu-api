@@ -101,6 +101,41 @@
                     }
                 }
             }
+        },
+        "/stages/piece-maps/{piece-map-name}": {
+            "get": {
+                "summary": "Returns a stage piece map",
+                "description": "Returns a mapping of stages to selected pieces",
+                "operationId": "getPieceMapByName",
+                "parameters": [
+                    {
+                        "name": "piece-map-name",
+                        "in": "path",
+                        "description": "Name of stage piece map",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A stage piece map",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/stage_piece_map"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -214,6 +249,11 @@
                     }
                 },
                 "type": "object"
+            }
+        },
+        "responses": {
+            "default": {
+                "description": "Unexpected error occured"
             }
         }
     },
