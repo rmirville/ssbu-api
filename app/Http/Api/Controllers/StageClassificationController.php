@@ -19,7 +19,7 @@ class StageClassificationController extends Controller
      *      path="/stages/classifications",
      *      summary="Returns an index of stage classifications",
      *      description="Returns all of stage classifications",
-     *      operationId="index",
+     *      operationId="classificationsIndex",
      *      @OA\Response(
      *          response=200,
      *          description="An index of all stage classifications",
@@ -27,8 +27,20 @@ class StageClassificationController extends Controller
      *              type="object",
      *              @OA\Property(
      *                  property="data",
-     *                  type="array",
-     *                  @OA\Items(ref="#/components/schemas/StageClassification"),
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="_links",
+     *                      ref="#/components/schemas/links",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="_embedded",
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="classifications",
+     *                          type="array",
+     *                          @OA\Items(ref="#/components/schemas/stage_summary"),
+     *                      ),
+     *                  ),
      *              ),
      *          ),
      *      ),

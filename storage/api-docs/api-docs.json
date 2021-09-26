@@ -18,21 +18,34 @@
     "paths": {
         "/stages/classifications": {
             "get": {
-                "summary": "Returns all stage classifications",
+                "summary": "Returns an index of stage classifications",
                 "description": "Returns all of stage classifications",
-                "operationId": "index",
+                "operationId": "classificationsIndex",
                 "responses": {
                     "200": {
-                        "description": "A list of all stage classifications",
+                        "description": "An index of all stage classifications",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/StageClassification"
-                                            }
+                                            "properties": {
+                                                "_links": {
+                                                    "$ref": "#/components/schemas/links"
+                                                },
+                                                "_embedded": {
+                                                    "properties": {
+                                                        "classifications": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/components/schemas/stage_summary"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -49,19 +62,61 @@
     },
     "components": {
         "schemas": {
-            "StageClassification": {
-                "description": "The collection of descriptors of a stage",
+            "links": {
                 "properties": {
+                    "self": {
+                        "properties": {
+                            "href": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "id": {
+                "type": "string"
+            },
+            "game_name": {
+                "description": "The stage's in-game ID",
+                "type": "string"
+            },
+            "name": {
+                "description": "The stage's name",
+                "type": "string"
+            },
+            "stage_summary": {
+                "properties": {
+                    "_links": {
+                        "$ref": "#/components/schemas/links"
+                    },
                     "id": {
-                        "type": "string"
+                        "$ref": "#/components/schemas/id"
                     },
                     "gameName": {
-                        "description": "The stage's in-code ID",
-                        "type": "string"
+                        "$ref": "#/components/schemas/game_name"
                     },
                     "name": {
-                        "description": "The stage's name",
-                        "type": "string"
+                        "$ref": "#/components/schemas/name"
+                    }
+                },
+                "type": "object"
+            },
+            "stage_classification": {
+                "description": "The collection of descriptors of a stage",
+                "properties": {
+                    "_links": {
+                        "$ref": "#/components/schemas/links"
+                    },
+                    "id": {
+                        "$ref": "#/components/schemas/id"
+                    },
+                    "gameName": {
+                        "$ref": "#/components/schemas/game_name"
+                    },
+                    "name": {
+                        "$ref": "#/components/schemas/name"
                     },
                     "abbr": {
                         "description": "The stage's abbreviated name",

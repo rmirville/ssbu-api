@@ -24,22 +24,70 @@ class Controller
      * ),
      * @OA\Components(
      *      @OA\Schema(
-     *          schema="StageClassification",
+     *          schema="links",
      *          type="object",
-     *          description="The collection of descriptors of a stage",
+     *          @OA\Property(
+     *              property="self",
+     *              type="object",
+     *              @OA\Property(
+     *                  property="href",
+     *                  type="string",
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="id",
+     *          type="string",
+     *      ),
+     *      @OA\Schema(
+     *          schema="game_name",
+     *          type="string",
+     *          description="The stage's in-game ID",
+     *      ),
+     *      @OA\Schema(
+     *          schema="name",
+     *          type="string",
+     *          description="The stage's name",
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_summary",
+     *          type="object",
+     *          @OA\Property(
+     *              property="_links",
+     *              ref="#/components/schemas/links",
+     *          ),
      *          @OA\Property(
      *              property="id",
-     *              type="string",
+     *              ref="#/components/schemas/id",
      *          ),
      *          @OA\Property(
      *              property="gameName",
-     *              type="string",
-     *              description="The stage's in-code ID"
+     *              ref="#/components/schemas/game_name",
      *          ),
      *          @OA\Property(
      *              property="name",
-     *              type="string",
-     *              description="The stage's name",
+     *              ref="#/components/schemas/name",
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_classification",
+     *          type="object",
+     *          description="The collection of descriptors of a stage",
+     *          @OA\Property(
+     *              property="_links",
+     *              ref="#/components/schemas/links",
+     *          ),
+     *          @OA\Property(
+     *              property="id",
+     *              ref="#/components/schemas/id",
+     *          ),
+     *          @OA\Property(
+     *              property="gameName",
+     *              ref="#/components/schemas/game_name",
+     *          ),
+     *          @OA\Property(
+     *              property="name",
+     *              ref="#/components/schemas/name",
      *          ),
      *          @OA\Property(
      *              property="abbr",
