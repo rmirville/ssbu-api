@@ -58,6 +58,49 @@
                     }
                 }
             }
+        },
+        "/stages/piece-maps": {
+            "get": {
+                "summary": "Returns an index of stage piece maps",
+                "description": "Returns an index of stage piece maps",
+                "operationId": "pieceMapsIndex",
+                "responses": {
+                    "200": {
+                        "description": "An index of all stage piece maps",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "_links": {
+                                                    "$ref": "#/components/schemas/links"
+                                                },
+                                                "_embedded": {
+                                                    "properties": {
+                                                        "pieceMaps": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/components/schemas/stage_piece_map_summary"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error occured"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -129,6 +172,45 @@
                     "tourneyPresence": {
                         "description": "The stage's presence in major tournaments",
                         "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "stage_piece": {
+                "properties": {
+                    "lvd": {
+                        "type": "string"
+                    },
+                    "pieceName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "stage_piece_map": {
+                "properties": {
+                    "_links": {
+                        "$ref": "#/components/schemas/links"
+                    },
+                    "id": {
+                        "$ref": "#/components/schemas/id"
+                    },
+                    "maps": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/stage_piece"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "stage_piece_map_summary": {
+                "properties": {
+                    "_links": {
+                        "$ref": "#/components/schemas/links"
+                    },
+                    "id": {
+                        "$ref": "#/components/schemas/id"
                     }
                 },
                 "type": "object"

@@ -10,5 +10,5 @@ class StageClassificationSet extends Model
     use HasFactory;
 
     protected $connection = 'mongodb';
-    protected $primaryKey = 'name';
+    protected $primaryKey = 'id';
 }

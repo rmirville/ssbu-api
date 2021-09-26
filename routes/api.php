@@ -19,4 +19,5 @@ Route::group([
   'namespace' => 'App\Http\Api\Controllers',
 ], function () {
   Route::resource('classifications', 'StageClassificationController')->only(['index', 'show']);
+  Route::resource('piece-maps', 'StagePieceMapController')->only(['index', 'show']);
 });

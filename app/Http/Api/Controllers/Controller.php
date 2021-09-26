@@ -105,6 +105,47 @@ class Controller
      *              description="The stage's presence in major tournaments",
      *          ),
      *      ),
+     *      @OA\Schema(
+     *          schema="stage_piece",
+     *          type="object",
+     *          @OA\Property(
+     *              property="lvd",
+     *              type="string",
+     *          ),
+     *          @OA\Property(
+     *              property="pieceName",
+     *              type="string",
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_piece_map",
+     *          type="object",
+     *          @OA\Property(
+     *              property="_links",
+     *              ref="#/components/schemas/links",
+     *          ),
+     *          @OA\Property(
+     *              property="id",
+     *              ref="#/components/schemas/id",
+     *          ),
+     *          @OA\Property(
+     *              property="maps",
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/stage_piece"),
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_piece_map_summary",
+     *          type="object",
+     *          @OA\Property(
+     *              property="_links",
+     *              ref="#/components/schemas/links",
+     *          ),
+     *          @OA\Property(
+     *              property="id",
+     *              ref="#/components/schemas/id",
+     *          ),
+     *      ),
      * ),
      */
 }

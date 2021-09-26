@@ -10,7 +10,7 @@ class StagePieceMap extends Model
     use HasFactory;
 
     protected $connection = 'mongodb';
-    protected $primaryKey = 'name';
+    protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $incrementing = false;
     public $timestamps = false;

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class StageClassificationCollection extends ResourceCollection
+class StagePieceMapCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -17,11 +17,11 @@ class StageClassificationCollection extends ResourceCollection
         return [
             '_links' => [
                 'self' => [
-                    'href' => env('SSBUTOOLS_API_HOST') . '/stages/classifications/',
+                    'href' => env('SSBUTOOLS_API_HOST') . '/stages/piece-maps/',
                 ],
             ],
             '_embedded' => [
-                'classifications' => $this->collection->map(function ($item) {
+                'pieceMaps' => $this->collection->map(function ($item) {
                         return $item->summary();
                     }
                 ),
