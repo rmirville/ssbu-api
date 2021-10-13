@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Api\Controllers\StageClassificationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,6 +20,7 @@ Route::group([
   'prefix' => 'v1/stages',
   'namespace' => 'App\Http\Api\Controllers',
 ], function () {
-  Route::resource('classifications', 'StageClassificationController')->only(['index', 'show']);
+  Route::get('/classifications', [StageClassificationController::class, 'index']);
+  Route::get('/{classification}/classifications', [StageClassificationController::class, 'show']);
   Route::resource('piece-maps', 'StagePieceMapController')->only(['index', 'show']);
 });

@@ -54,6 +54,30 @@ class StageClassificationController extends Controller
         return new StageClassificationCollection(StageClassification::all());
     }
 
+    /**
+     * @OA\Get(
+     *      path="/stages/{id}/classifications",
+     *      summary="Returns a stage's classifications",
+     *      description="Returns a stage's classifications",
+     *      operationId="classificationsShow",
+     *      @OA\Response(
+     *          response=200,
+     *          description="A stage's classifications",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="object",
+     *                  ref="#/components/schemas/stage_classification",
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="Unexpected error occured",
+     *      ),
+     * )
+     */
     public function show(StageClassification $classification) {
         return new StageClassificationResource($classification);
     }

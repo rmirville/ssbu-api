@@ -59,6 +59,33 @@
                 }
             }
         },
+        "/stages/{id}/classifications": {
+            "get": {
+                "summary": "Returns a stage's classifications",
+                "description": "Returns a stage's classifications",
+                "operationId": "classificationsShow",
+                "responses": {
+                    "200": {
+                        "description": "A stage's classifications",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/stage_classification"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error occured"
+                    }
+                }
+            }
+        },
         "/stages/piece-maps": {
             "get": {
                 "summary": "Returns an index of stage piece maps",
