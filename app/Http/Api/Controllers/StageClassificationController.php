@@ -26,20 +26,16 @@ class StageClassificationController extends Controller
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(
-     *                  property="data",
+     *                  property="_links",
+     *                  ref="#/components/schemas/links",
+     *              ),
+     *              @OA\Property(
+     *                  property="_embedded",
      *                  type="object",
      *                  @OA\Property(
-     *                      property="_links",
-     *                      ref="#/components/schemas/links",
-     *                  ),
-     *                  @OA\Property(
-     *                      property="_embedded",
-     *                      type="object",
-     *                      @OA\Property(
-     *                          property="classifications",
-     *                          type="array",
-     *                          @OA\Items(ref="#/components/schemas/stage_summary"),
-     *                      ),
+     *                      property="classifications",
+     *                      type="array",
+     *                      @OA\Items(ref="#/components/schemas/stage_summary"),
      *                  ),
      *              ),
      *          ),
@@ -65,11 +61,7 @@ class StageClassificationController extends Controller
      *          description="A stage's classifications",
      *          @OA\JsonContent(
      *              type="object",
-     *              @OA\Property(
-     *                  property="data",
-     *                  type="object",
-     *                  ref="#/components/schemas/stage_classification",
-     *              ),
+     *              ref="#/components/schemas/stage_classification",
      *          ),
      *      ),
      *      @OA\Response(

@@ -28,21 +28,16 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "data": {
+                                        "_links": {
+                                            "$ref": "#/components/schemas/links"
+                                        },
+                                        "_embedded": {
                                             "properties": {
-                                                "_links": {
-                                                    "$ref": "#/components/schemas/links"
-                                                },
-                                                "_embedded": {
-                                                    "properties": {
-                                                        "classifications": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "$ref": "#/components/schemas/stage_summary"
-                                                            }
-                                                        }
-                                                    },
-                                                    "type": "object"
+                                                "classifications": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/stage_summary"
+                                                    }
                                                 }
                                             },
                                             "type": "object"
@@ -70,12 +65,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/stage_classification"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/stage_classification"
                                 }
                             }
                         }
@@ -98,21 +88,16 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "data": {
+                                        "_links": {
+                                            "$ref": "#/components/schemas/links"
+                                        },
+                                        "_embedded": {
                                             "properties": {
-                                                "_links": {
-                                                    "$ref": "#/components/schemas/links"
-                                                },
-                                                "_embedded": {
-                                                    "properties": {
-                                                        "pieceMaps": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "$ref": "#/components/schemas/stage_piece_map_summary"
-                                                            }
-                                                        }
-                                                    },
-                                                    "type": "object"
+                                                "pieceMaps": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/stage_piece_map_summary"
+                                                    }
                                                 }
                                             },
                                             "type": "object"
@@ -151,12 +136,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/stage_piece_map"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/stage_piece_map"
                                 }
                             }
                         }

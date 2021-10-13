@@ -24,22 +24,18 @@ class StagePieceMapController extends Controller
      *          response=200,
      *          description="An index of all stage piece maps",
      *          @OA\JsonContent(
-     *              type="object",
+     *          type="object",
      *              @OA\Property(
-     *                  property="data",
+     *                  property="_links",
+     *                  ref="#/components/schemas/links",
+     *              ),
+     *              @OA\Property(
+     *                  property="_embedded",
      *                  type="object",
      *                  @OA\Property(
-     *                      property="_links",
-     *                      ref="#/components/schemas/links",
-     *                  ),
-     *                  @OA\Property(
-     *                      property="_embedded",
-     *                      type="object",
-     *                      @OA\Property(
-     *                          property="pieceMaps",
-     *                          type="array",
-     *                          @OA\Items(ref="#/components/schemas/stage_piece_map_summary"),
-     *                      ),
+     *                      property="pieceMaps",
+     *                      type="array",
+     *                      @OA\Items(ref="#/components/schemas/stage_piece_map_summary"),
      *                  ),
      *              ),
      *          ),
@@ -74,16 +70,12 @@ class StagePieceMapController extends Controller
      *          response=200,
      *          description="A stage piece map",
      *          @OA\JsonContent(
-     *              type="object",
+     *          type="object",
      *              @OA\Property(
-     *                  property="data",
-     *                  type="object",
-     *                  @OA\Property(
-     *                      property="_links",
-     *                      ref="#/components/schemas/links",
-     *                  ),
-     *                  ref="#/components/schemas/stage_piece_map"),
+     *                  property="_links",
+     *                  ref="#/components/schemas/links",
      *              ),
+     *              ref="#/components/schemas/stage_piece_map"),
      *          ),
      *      ),
      *      @OA\Response(
