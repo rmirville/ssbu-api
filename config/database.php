@@ -48,6 +48,8 @@ return [
                 'readPreference' => env('SSBUTOOLS_DB_MONGO_R_READ_PREF'),
                 'replicaSet' => env('SSBUTOOLS_DB_MONGO_R_REPLICA_SET'),
                 'ssl' => 'true',
+                'tls' => 'true',
+                'tlsCAFile' => env('SSL_CERT_FILE'),
             ],
         ],
 
