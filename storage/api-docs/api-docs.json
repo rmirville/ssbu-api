@@ -59,6 +59,17 @@
                 "summary": "Returns a stage's classifications",
                 "description": "Returns a stage's classifications",
                 "operationId": "classificationsShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of stage",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "A stage's classifications",

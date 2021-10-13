@@ -56,6 +56,15 @@ class StageClassificationController extends Controller
      *      summary="Returns a stage's classifications",
      *      description="Returns a stage's classifications",
      *      operationId="classificationsShow",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="Id of stage",
+     *          @OA\Schema(
+     *              type="string"
+     *          ),
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="A stage's classifications",
