@@ -2,19 +2,17 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
-class StageClassificationResource extends JsonResource
+class StageResource extends StageClassificationResource
 {
     public $preserveKeys = true;
 
-    protected function link(string $type) {
+    public function link(string $type) {
         $url = env('SSBUTOOLS_API_HOST') . '/stages';
         switch ($type) {
-            case 'index':
-                $url = $url . '/classifications';
-                break;
             case 'self':
+                $url = $url . '/' . $this->id;
+                break;
+            case 'classifications':
                 $url = $url . '/' . $this->id . '/classifications';
                 break;
         }
@@ -30,11 +28,11 @@ class StageClassificationResource extends JsonResource
             [
                 '_links' => $this->link('self'),
             ],
-            $this->baseProperties(),
+            $this->properties()
         );
     }
 
-    public function baseProperties() {
+    public function properties() {
         return [
             'id' => $this->id,
             'gameName' => $this->gameName,
@@ -55,14 +53,10 @@ class StageClassificationResource extends JsonResource
                 '_links' => array_merge(
                     $this->link('index'),
                     $this->link('self'),
+                    $this->link('classifications'),
                 ),
             ],
-            $this->baseProperties(),
-            [
-                'abbr' => $this->abbr,
-                'series' => $this->series,
-                'tourneyPresence' => $this->tourneyPresence,
-            ]
+            $this->properties()
         );
     }
 }
