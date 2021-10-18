@@ -8,17 +8,28 @@ class StagePieceMapResource extends JsonResource
 {
     public $preserveKeys = true;
 
+    public function link(string $type) {
+        $url = env('SSBUTOOLS_API_HOST') . '/stages/piece-maps';
+        switch ($type) {
+            case 'index':
+                break;
+            case 'self':
+                $url = $url . '/' . $this->id;
+        }
+        return [
+            $type => [
+                'href' => $url,
+            ],
+        ];
+    }
+
     public function href() {
         return env('SSBUTOOLS_API_HOST') . '/stages/piece-maps/' . $this->id;
     }
 
     public function summary() {
         return [
-            '_links' => [
-                'self' => [
-                    'href' => $this->href(),
-                ],
-            ],
+            '_links' => $this->link('self'),
             'id' => $this->id,
         ];
     }
@@ -31,7 +42,14 @@ class StagePieceMapResource extends JsonResource
      */
     public function toArray($request)
     {
-        return array_merge($this->summary(), [
+        return array_merge(
+            [
+                '_links' => array_merge(
+                    $this->link('index'),
+                    $this->link('self'),
+                ),
+            ],
+            [
             'maps' => $this->maps,
         ]);
     }
