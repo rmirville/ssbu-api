@@ -29,7 +29,7 @@
                                 "schema": {
                                     "properties": {
                                         "_links": {
-                                            "$ref": "#/components/schemas/links"
+                                            "$ref": "#/components/schemas/links_index"
                                         },
                                         "_embedded": {
                                             "properties": {
@@ -185,7 +185,7 @@
                                 "schema": {
                                     "properties": {
                                         "_links": {
-                                            "$ref": "#/components/schemas/links"
+                                            "$ref": "#/components/schemas/links_index"
                                         },
                                         "_embedded": {
                                             "properties": {
@@ -236,6 +236,9 @@
                                 }
                             }
                         }
+                    },
+                    "default": {
+                        "description": "Unexpected error occured"
                     }
                 }
             }
@@ -258,6 +261,22 @@
                     }
                 },
                 "type": "object"
+            },
+            "links_index": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "properties": {
+                            "index": {
+                                "$ref": "#/components/schemas/link"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "$ref": "#/components/schemas/links"
+                    }
+                ]
             },
             "id": {
                 "type": "string"
@@ -329,7 +348,7 @@
                 "description": "The collection of descriptors of a stage",
                 "properties": {
                     "_links": {
-                        "$ref": "#/components/schemas/links"
+                        "$ref": "#/components/schemas/links_index"
                     },
                     "id": {
                         "$ref": "#/components/schemas/id"
@@ -369,7 +388,7 @@
             "stage_piece_map": {
                 "properties": {
                     "_links": {
-                        "$ref": "#/components/schemas/links"
+                        "$ref": "#/components/schemas/links_index"
                     },
                     "id": {
                         "$ref": "#/components/schemas/id"
@@ -393,11 +412,6 @@
                     }
                 },
                 "type": "object"
-            }
-        },
-        "responses": {
-            "default": {
-                "description": "Unexpected error occured"
             }
         }
     },

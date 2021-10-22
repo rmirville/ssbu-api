@@ -27,7 +27,7 @@ class StageClassificationController extends Controller
      *              type="object",
      *              @OA\Property(
      *                  property="_links",
-     *                  ref="#/components/schemas/links",
+     *                  ref="#/components/schemas/links_index",
      *              ),
      *              @OA\Property(
      *                  property="_embedded",

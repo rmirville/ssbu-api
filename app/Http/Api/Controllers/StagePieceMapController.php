@@ -27,7 +27,7 @@ class StagePieceMapController extends Controller
      *          type="object",
      *              @OA\Property(
      *                  property="_links",
-     *                  ref="#/components/schemas/links",
+     *                  ref="#/components/schemas/links_index",
      *              ),
      *              @OA\Property(
      *                  property="_embedded",
@@ -69,14 +69,7 @@ class StagePieceMapController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="A stage piece map",
-     *          @OA\JsonContent(
-     *          type="object",
-     *              @OA\Property(
-     *                  property="_links",
-     *                  ref="#/components/schemas/links",
-     *              ),
-     *              ref="#/components/schemas/stage_piece_map"),
-     *          ),
+     *          @OA\JsonContent(ref="#/components/schemas/stage_piece_map"),
      *      ),
      *      @OA\Response(
      *          response="default",

@@ -41,6 +41,19 @@ class Controller
      *          ),
      *      ),
      *      @OA\Schema(
+     *          schema="links_index",
+     *          type="object",
+     *          allOf={
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="index",
+     *                      ref="#/components/schemas/link",
+     *                  ),
+     *              ),
+     *              @OA\Schema(ref="#/components/schemas/links"),
+     *          },
+     *      ),
+     *      @OA\Schema(
      *          schema="id",
      *          type="string",
      *      ),
@@ -113,7 +126,7 @@ class Controller
      *          description="The collection of descriptors of a stage",
      *          @OA\Property(
      *              property="_links",
-     *              ref="#/components/schemas/links",
+     *              ref="#/components/schemas/links_index",
      *          ),
      *          @OA\Property(
      *              property="id",
@@ -160,7 +173,7 @@ class Controller
      *          type="object",
      *          @OA\Property(
      *              property="_links",
-     *              ref="#/components/schemas/links",
+     *              ref="#/components/schemas/links_index",
      *          ),
      *          @OA\Property(
      *              property="id",
