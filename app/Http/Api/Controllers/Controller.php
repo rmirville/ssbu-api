@@ -24,15 +24,20 @@ class Controller
      * ),
      * @OA\Components(
      *      @OA\Schema(
+     *          schema="link",
+     *          type="object",
+     *          @OA\Property(
+     *              property="href",
+     *              type="string",
+     *          ),
+     *      ),
+     *      @OA\Schema(
      *          schema="links",
      *          type="object",
      *          @OA\Property(
      *              property="self",
      *              type="object",
-     *              @OA\Property(
-     *                  property="href",
-     *                  type="string",
-     *              ),
+     *              ref="#/components/schemas/link",
      *          ),
      *      ),
      *      @OA\Schema(
@@ -50,12 +55,8 @@ class Controller
      *          description="The stage's name",
      *      ),
      *      @OA\Schema(
-     *          schema="stage_summary",
+     *          schema="stage_base",
      *          type="object",
-     *          @OA\Property(
-     *              property="_links",
-     *              ref="#/components/schemas/links",
-     *          ),
      *          @OA\Property(
      *              property="id",
      *              ref="#/components/schemas/id",
@@ -68,6 +69,43 @@ class Controller
      *              property="name",
      *              ref="#/components/schemas/name",
      *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage",
+     *          allOf={
+     *              @OA\Schema(
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="_links",
+     *                      @OA\Property(
+     *                          property="index",
+     *                          ref="#/components/schemas/link",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="self",
+     *                          ref="#/components/schemas/link",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="classifications",
+     *                          ref="#/components/schemas/link",
+     *                      ),
+     *                  ),
+     *              ),
+     *              @OA\Schema(ref="#/components/schemas/stage_base"),
+     *          }
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_summary",
+     *          allOf={
+     *              @OA\Schema(
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="_links",
+     *                      ref="#/components/schemas/links",
+     *                  ),
+     *              ),
+     *              @OA\Schema(ref="#/components/schemas/stage_base"),
+     *          }
      *      ),
      *      @OA\Schema(
      *          schema="stage_classification",

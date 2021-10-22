@@ -87,6 +87,91 @@
                 }
             }
         },
+        "/stages": {
+            "get": {
+                "summary": "Returns an index of stages",
+                "description": "Returns all stages",
+                "operationId": "stagesIndex",
+                "responses": {
+                    "200": {
+                        "description": "An index of all stages",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "_links": {
+                                            "properties": {
+                                                "self": {
+                                                    "$ref": "#/components/schemas/link"
+                                                },
+                                                "classifications": {
+                                                    "$ref": "#/components/schemas/link"
+                                                },
+                                                "classificationSets": {
+                                                    "$ref": "#/components/schemas/link"
+                                                },
+                                                "pieceMaps": {
+                                                    "$ref": "#/components/schemas/link"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "_embedded": {
+                                            "properties": {
+                                                "stages": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/stage_summary"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error occured"
+                    }
+                }
+            }
+        },
+        "/stages/{id}": {
+            "get": {
+                "summary": "Returns a stage's index of operations",
+                "description": "Returns a stage's index of operations",
+                "operationId": "stagesShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of stage",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A stage's index of operations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/stage"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error occured"
+                    }
+                }
+            }
+        },
         "/stages/piece-maps": {
             "get": {
                 "summary": "Returns an index of stage piece maps",
@@ -158,15 +243,18 @@
     },
     "components": {
         "schemas": {
+            "link": {
+                "properties": {
+                    "href": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "links": {
                 "properties": {
                     "self": {
-                        "properties": {
-                            "href": {
-                                "type": "string"
-                            }
-                        },
-                        "type": "object"
+                        "$ref": "#/components/schemas/link"
                     }
                 },
                 "type": "object"
@@ -182,11 +270,8 @@
                 "description": "The stage's name",
                 "type": "string"
             },
-            "stage_summary": {
+            "stage_base": {
                 "properties": {
-                    "_links": {
-                        "$ref": "#/components/schemas/links"
-                    },
                     "id": {
                         "$ref": "#/components/schemas/id"
                     },
@@ -198,6 +283,47 @@
                     }
                 },
                 "type": "object"
+            },
+            "stage": {
+                "allOf": [
+                    {
+                        "properties": {
+                            "_links": {
+                                "properties": {
+                                    "index": {
+                                        "$ref": "#/components/schemas/link"
+                                    },
+                                    "self": {
+                                        "$ref": "#/components/schemas/link"
+                                    },
+                                    "classifications": {
+                                        "$ref": "#/components/schemas/link"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "$ref": "#/components/schemas/stage_base"
+                    }
+                ]
+            },
+            "stage_summary": {
+                "allOf": [
+                    {
+                        "properties": {
+                            "_links": {
+                                "$ref": "#/components/schemas/links"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "$ref": "#/components/schemas/stage_base"
+                    }
+                ]
             },
             "stage_classification": {
                 "description": "The collection of descriptors of a stage",

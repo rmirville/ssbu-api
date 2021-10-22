@@ -16,7 +16,7 @@ class StageController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/stages/",
+     *      path="/stages",
      *      summary="Returns an index of stages",
      *      description="Returns all stages",
      *      operationId="stagesIndex",
@@ -27,7 +27,23 @@ class StageController extends Controller
      *              type="object",
      *              @OA\Property(
      *                  property="_links",
-     *                  ref="#/components/schemas/links",
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="self",
+     *                      ref="#/components/schemas/link",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="classifications",
+     *                      ref="#/components/schemas/link",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="classificationSets",
+     *                      ref="#/components/schemas/link",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="pieceMaps",
+     *                      ref="#/components/schemas/link",
+     *                  ),
      *              ),
      *              @OA\Property(
      *                  property="_embedded",
@@ -52,10 +68,10 @@ class StageController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/stages/{id}/classifications",
-     *      summary="Returns a stage's classifications",
-     *      description="Returns a stage's classifications",
-     *      operationId="classificationsShow",
+     *      path="/stages/{id}",
+     *      summary="Returns a stage's index of operations",
+     *      description="Returns a stage's index of operations",
+     *      operationId="stagesShow",
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
@@ -67,11 +83,8 @@ class StageController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="A stage's classifications",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              ref="#/components/schemas/stage_classification",
-     *          ),
+     *          description="A stage's index of operations",
+     *          @OA\JsonContent(ref="#/components/schemas/stage"),
      *      ),
      *      @OA\Response(
      *          response="default",
