@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Api\Controllers\StageClassificationController;
 use App\Http\Api\Controllers\StageController;
+use App\Http\Api\Controllers\StageGameDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,5 @@ Route::group([
   Route::resource('piece-maps', 'StagePieceMapController')->only(['index', 'show']);
   Route::get('/{stage}', [StageController::class, 'show']);
   Route::get('/{classification}/classifications', [StageClassificationController::class, 'show']);
+  Route::get('/{stage}/game-data', [StageGameDataController::class, 'show']);
 });

@@ -172,6 +172,77 @@
                 }
             }
         },
+        "/stages/game-data": {
+            "get": {
+                "summary": "Returns an index of stages' game data",
+                "description": "Returns a summary of all stages' game data",
+                "operationId": "stageGameDataIndex",
+                "responses": {
+                    "200": {
+                        "description": "An index of all stages",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "_links": {
+                                            "$ref": "#/components/schemas/links_index"
+                                        },
+                                        "_embedded": {
+                                            "properties": {
+                                                "stages": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/stage_summary"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error occured"
+                    }
+                }
+            }
+        },
+        "/stages/{id}/game-data": {
+            "get": {
+                "summary": "Returns a stage's game data",
+                "description": "Returns a stage's game data",
+                "operationId": "stageGameDataShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of stage",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A stage's game data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/stage_game_data"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error occured"
+                    }
+                }
+            }
+        },
         "/stages/piece-maps": {
             "get": {
                 "summary": "Returns an index of stage piece maps",
@@ -374,13 +445,108 @@
                 },
                 "type": "object"
             },
-            "stage_piece": {
+            "stage_piece_map_item": {
                 "properties": {
                     "lvd": {
                         "type": "string"
                     },
                     "pieceName": {
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "stage_material": {
+                "properties": {
+                    "leftLedge": {
+                        "type": "boolean"
+                    },
+                    "rightLedge": {
+                        "type": "boolean"
+                    },
+                    "noWallJump": {
+                        "type": "boolean"
+                    },
+                    "passthroughAngle": {
+                        "type": "number"
+                    },
+                    "length": {
+                        "type": "number"
+                    },
+                    "ceiling": {
+                        "type": "boolean"
+                    },
+                    "wall": {
+                        "type": "boolean"
+                    },
+                    "material": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "stage_piece": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "vertex": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    },
+                    "materials": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/stage_material"
+                        }
+                    },
+                    "boundingBox": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "stage_game_data_raw": {
+                "properties": {
+                    "stage": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "$ref": "#/components/schemas/name"
+                    },
+                    "lvd": {
+                        "type": "string"
+                    },
+                    "collisions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/stage_piece"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "stage_game_data": {
+                "properties": {
+                    "id": {
+                        "$ref": "#/components/schemas/id"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/stage_game_data_raw"
+                        }
                     }
                 },
                 "type": "object"
@@ -396,7 +562,7 @@
                     "maps": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/stage_piece"
+                            "$ref": "#/components/schemas/stage_piece_map_item"
                         }
                     }
                 },

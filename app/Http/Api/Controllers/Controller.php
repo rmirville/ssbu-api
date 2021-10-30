@@ -157,7 +157,7 @@ class Controller
      *          ),
      *      ),
      *      @OA\Schema(
-     *          schema="stage_piece",
+     *          schema="stage_piece_map_item",
      *          type="object",
      *          @OA\Property(
      *              property="lvd",
@@ -166,6 +166,105 @@ class Controller
      *          @OA\Property(
      *              property="pieceName",
      *              type="string",
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_material",
+     *          type="object",
+     *          @OA\Property(
+     *              property="leftLedge",
+     *              type="boolean",
+     *          ),
+     *          @OA\Property(
+     *              property="rightLedge",
+     *              type="boolean",
+     *          ),
+     *          @OA\Property(
+     *              property="noWallJump",
+     *              type="boolean",
+     *          ),
+     *          @OA\Property(
+     *              property="passthroughAngle",
+     *              type="number",
+     *          ),
+     *          @OA\Property(
+     *              property="length",
+     *              type="number",
+     *          ),
+     *          @OA\Property(
+     *              property="ceiling",
+     *              type="boolean",
+     *          ),
+     *          @OA\Property(
+     *              property="wall",
+     *              type="boolean",
+     *          ),
+     *          @OA\Property(
+     *              property="material",
+     *              type="string",
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_piece",
+     *          type="object",
+     *          @OA\Property(
+     *              property="name",
+     *              type="string",
+     *          ),
+     *          @OA\Property(
+     *              property="vertex",
+     *              type="array",
+     *              @OA\Items(
+     *                  type="array",
+     *                  @OA\Items(type="number"),
+     *              ),
+     *          ),
+     *          @OA\Property(
+     *              property="materials",
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/stage_material"),
+     *          ),
+     *          @OA\Property(
+     *              property="boundingBox",
+     *              type="array",
+     *              @OA\Items(
+     *                  type="array",
+     *                  @OA\Items(type="number"),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_game_data_raw",
+     *          type="object",
+     *          @OA\Property(
+     *              property="stage",
+     *              type="string",
+     *          ),
+     *          @OA\Property(
+     *              property="name",
+     *              ref="#/components/schemas/name",
+     *          ),
+     *          @OA\Property(
+     *              property="lvd",
+     *              type="string",
+     *          ),
+     *          @OA\Property(
+     *              property="collisions",
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/stage_piece"),
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_game_data",
+     *          type="object",
+     *          @OA\Property(
+     *              property="id",
+     *              ref="#/components/schemas/id",
+     *          ),
+     *          @OA\Property(
+     *              property="data",
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/stage_game_data_raw"),
      *          ),
      *      ),
      *      @OA\Schema(
@@ -182,7 +281,7 @@ class Controller
      *          @OA\Property(
      *              property="maps",
      *              type="array",
-     *              @OA\Items(ref="#/components/schemas/stage_piece"),
+     *              @OA\Items(ref="#/components/schemas/stage_piece_map_item"),
      *          ),
      *      ),
      *      @OA\Schema(
