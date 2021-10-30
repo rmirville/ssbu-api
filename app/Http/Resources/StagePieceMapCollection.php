@@ -16,11 +16,11 @@ class StagePieceMapCollection extends ResourceCollection
     {
         return [
             '_links' => [
-                'index' => [
-                    'href' => env('SSBUTOOLS_API_HOST') . '/stages',
-                ],
                 'self' => [
                     'href' => env('SSBUTOOLS_API_HOST') . '/stages/piece-maps/',
+                ],
+                'index' => [
+                    'href' => env('SSBUTOOLS_API_HOST') . '/stages',
                 ],
             ],
             '_embedded' => [

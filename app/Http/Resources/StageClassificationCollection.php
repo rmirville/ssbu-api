@@ -16,11 +16,11 @@ class StageClassificationCollection extends ResourceCollection
     {
         return [
             '_links' => [
-                'index' => [
-                    'href' => env('SSBUTOOLS_API_HOST') . '/stages',
-                ],
                 'self' => [
                     'href' => env('SSBUTOOLS_API_HOST') . '/stages/classifications',
+                ],
+                'index' => [
+                    'href' => env('SSBUTOOLS_API_HOST') . '/stages',
                 ],
             ],
             '_embedded' => [

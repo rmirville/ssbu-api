@@ -45,8 +45,8 @@ class StagePieceMapResource extends JsonResource
         return array_merge(
             [
                 '_links' => array_merge(
-                    $this->link('index'),
                     $this->link('self'),
+                    $this->link('index'),
                 ),
             ],
             [

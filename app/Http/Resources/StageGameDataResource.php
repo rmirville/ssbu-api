@@ -50,9 +50,9 @@ class StageGameDataResource extends JsonResource
         return array_merge(
             [
                 '_links' => array_merge(
+                    $this->link('self'),
                     $this->link('index'),
                     $this->link('stage'),
-                    $this->link('self'),
                 ),
             ],
             [

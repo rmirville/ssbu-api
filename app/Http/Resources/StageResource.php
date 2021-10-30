@@ -53,8 +53,8 @@ class StageResource extends StageClassificationResource
         return array_merge(
             [
                 '_links' => array_merge(
-                    $this->link('index'),
                     $this->link('self'),
+                    $this->link('index'),
                     $this->link('classifications'),
                     $this->link('gameData'),
                 ),

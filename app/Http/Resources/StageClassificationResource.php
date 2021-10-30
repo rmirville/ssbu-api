@@ -14,6 +14,9 @@ class StageClassificationResource extends JsonResource
             case 'index':
                 $url = $url . '/classifications';
                 break;
+            case 'stage':
+                $url = $url . '/' . $this->id;
+                break;
             case 'self':
                 $url = $url . '/' . $this->id . '/classifications';
                 break;
@@ -53,8 +56,9 @@ class StageClassificationResource extends JsonResource
         return array_merge(
             [
                 '_links' => array_merge(
-                    $this->link('index'),
                     $this->link('self'),
+                    $this->link('index'),
+                    $this->link('stage'),
                 ),
             ],
             $this->baseProperties(),
