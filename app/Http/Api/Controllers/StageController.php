@@ -41,6 +41,10 @@ class StageController extends Controller
      *                      ref="#/components/schemas/link",
      *                  ),
      *                  @OA\Property(
+     *                      property="gameData",
+     *                      ref="#/components/schemas/link",
+     *                  ),
+     *                  @OA\Property(
      *                      property="pieceMaps",
      *                      ref="#/components/schemas/link",
      *                  ),

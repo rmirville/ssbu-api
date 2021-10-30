@@ -19,6 +19,9 @@ class StageCollection extends StageClassificationCollection
             case 'classificationSets':
                 $url = $url . '/classification-sets';
                 break;
+            case 'gameData':
+                $url = $url . '/game-data';
+                break;
             case 'pieceMaps':
                 $url = $url . '/piece-maps';
                 break;
@@ -43,6 +46,7 @@ class StageCollection extends StageClassificationCollection
                 $this->link('self'),
                 $this->link('classifications'),
                 $this->link('classificationSets'),
+                $this->link('gameData'),
                 $this->link('pieceMaps'),
             ),
             '_embedded' => [

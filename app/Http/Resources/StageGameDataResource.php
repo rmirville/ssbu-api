@@ -14,6 +14,9 @@ class StageGameDataResource extends JsonResource
             case 'index':
                 $url = $url . '/game-data';
                 break;
+            case 'stage':
+                $url = $url . '/' . $this->id;
+                break;
             case 'self':
                 $url = $url . '/' . $this->id . '/game-data';
         }
@@ -32,6 +35,7 @@ class StageGameDataResource extends JsonResource
         return [
             '_links' => $this->link('self'),
             'id' => $this->id,
+            'name' => $this->data[0]['name'],
         ];
     }
 
@@ -47,6 +51,7 @@ class StageGameDataResource extends JsonResource
             [
                 '_links' => array_merge(
                     $this->link('index'),
+                    $this->link('stage'),
                     $this->link('self'),
                 ),
             ],

@@ -44,13 +44,26 @@ class Controller
      *          schema="links_index",
      *          type="object",
      *          allOf={
+     *              @OA\Schema(ref="#/components/schemas/links"),
      *              @OA\Schema(
      *                  @OA\Property(
      *                      property="index",
      *                      ref="#/components/schemas/link",
      *                  ),
      *              ),
-     *              @OA\Schema(ref="#/components/schemas/links"),
+     *          },
+     *      ),
+     *      @OA\Schema(
+     *          schema="links_stage",
+     *          type="object",
+     *          allOf={
+     *              @OA\Schema(ref="#/components/schemas/links_index"),
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="stage",
+     *                      ref="#/components/schemas/link",
+     *                  ),
+     *              ),
      *          },
      *      ),
      *      @OA\Schema(
@@ -91,15 +104,19 @@ class Controller
      *                  @OA\Property(
      *                      property="_links",
      *                      @OA\Property(
-     *                          property="index",
-     *                          ref="#/components/schemas/link",
-     *                      ),
-     *                      @OA\Property(
      *                          property="self",
      *                          ref="#/components/schemas/link",
      *                      ),
      *                      @OA\Property(
+     *                          property="index",
+     *                          ref="#/components/schemas/link",
+     *                      ),
+     *                      @OA\Property(
      *                          property="classifications",
+     *                          ref="#/components/schemas/link",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="gameData",
      *                          ref="#/components/schemas/link",
      *                      ),
      *                  ),
@@ -126,7 +143,7 @@ class Controller
      *          description="The collection of descriptors of a stage",
      *          @OA\Property(
      *              property="_links",
-     *              ref="#/components/schemas/links_index",
+     *              ref="#/components/schemas/links_stage",
      *          ),
      *          @OA\Property(
      *              property="id",
@@ -257,6 +274,10 @@ class Controller
      *      @OA\Schema(
      *          schema="stage_game_data",
      *          type="object",
+     *          @OA\Property(
+     *              property="_links",
+     *              ref="#/components/schemas/links_stage",
+     *          ),
      *          @OA\Property(
      *              property="id",
      *              ref="#/components/schemas/id",

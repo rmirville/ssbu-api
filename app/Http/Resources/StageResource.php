@@ -15,6 +15,8 @@ class StageResource extends StageClassificationResource
             case 'classifications':
                 $url = $url . '/' . $this->id . '/classifications';
                 break;
+            case 'gameData':
+                $url = $url . '/' . $this->id . '/game-data';
         }
         return [
             $type => [
@@ -54,6 +56,7 @@ class StageResource extends StageClassificationResource
                     $this->link('index'),
                     $this->link('self'),
                     $this->link('classifications'),
+                    $this->link('gameData'),
                 ),
             ],
             $this->properties()

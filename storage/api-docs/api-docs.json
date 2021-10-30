@@ -110,6 +110,9 @@
                                                 "classificationSets": {
                                                     "$ref": "#/components/schemas/link"
                                                 },
+                                                "gameData": {
+                                                    "$ref": "#/components/schemas/link"
+                                                },
                                                 "pieceMaps": {
                                                     "$ref": "#/components/schemas/link"
                                                 }
@@ -179,7 +182,7 @@
                 "operationId": "stageGameDataIndex",
                 "responses": {
                     "200": {
-                        "description": "An index of all stages",
+                        "description": "An index of all stages' game data",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -189,10 +192,21 @@
                                         },
                                         "_embedded": {
                                             "properties": {
-                                                "stages": {
+                                                "gameData": {
                                                     "type": "array",
                                                     "items": {
-                                                        "$ref": "#/components/schemas/stage_summary"
+                                                        "properties": {
+                                                            "_links": {
+                                                                "$ref": "#/components/schemas/links"
+                                                            },
+                                                            "id": {
+                                                                "$ref": "#/components/schemas/id"
+                                                            },
+                                                            "name": {
+                                                                "$ref": "#/components/schemas/name"
+                                                            }
+                                                        },
+                                                        "type": "object"
                                                     }
                                                 }
                                             },
@@ -337,15 +351,31 @@
                 "type": "object",
                 "allOf": [
                     {
+                        "$ref": "#/components/schemas/links"
+                    },
+                    {
                         "properties": {
                             "index": {
                                 "$ref": "#/components/schemas/link"
                             }
                         },
                         "type": "object"
+                    }
+                ]
+            },
+            "links_stage": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/links_index"
                     },
                     {
-                        "$ref": "#/components/schemas/links"
+                        "properties": {
+                            "stage": {
+                                "$ref": "#/components/schemas/link"
+                            }
+                        },
+                        "type": "object"
                     }
                 ]
             },
@@ -380,13 +410,16 @@
                         "properties": {
                             "_links": {
                                 "properties": {
-                                    "index": {
-                                        "$ref": "#/components/schemas/link"
-                                    },
                                     "self": {
                                         "$ref": "#/components/schemas/link"
                                     },
+                                    "index": {
+                                        "$ref": "#/components/schemas/link"
+                                    },
                                     "classifications": {
+                                        "$ref": "#/components/schemas/link"
+                                    },
+                                    "gameData": {
                                         "$ref": "#/components/schemas/link"
                                     }
                                 },
@@ -419,7 +452,7 @@
                 "description": "The collection of descriptors of a stage",
                 "properties": {
                     "_links": {
-                        "$ref": "#/components/schemas/links_index"
+                        "$ref": "#/components/schemas/links_stage"
                     },
                     "id": {
                         "$ref": "#/components/schemas/id"
@@ -539,6 +572,9 @@
             },
             "stage_game_data": {
                 "properties": {
+                    "_links": {
+                        "$ref": "#/components/schemas/links_stage"
+                    },
                     "id": {
                         "$ref": "#/components/schemas/id"
                     },

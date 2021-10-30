@@ -24,6 +24,7 @@ Route::group([
 ], function () {
   Route::get('/', [StageController::class, 'index']);
   Route::get('/classifications', [StageClassificationController::class, 'index']);
+  Route::get('/game-data', [StageGameDataController::class, 'index']);
   Route::resource('piece-maps', 'StagePieceMapController')->only(['index', 'show']);
   Route::get('/{stage}', [StageController::class, 'show']);
   Route::get('/{classification}/classifications', [StageClassificationController::class, 'show']);

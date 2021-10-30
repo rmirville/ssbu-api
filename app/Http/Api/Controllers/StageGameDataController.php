@@ -4,7 +4,7 @@ namespace App\Http\Api\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StageGameDataResource;
-use App\Http\Resources\StageCollection;
+use App\Http\Resources\StageGameDataCollection;
 use App\Models\StageGameData;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -22,20 +22,34 @@ class StageGameDataController extends Controller
      *      operationId="stageGameDataIndex",
      *      @OA\Response(
      *          response=200,
-     *          description="An index of all stages",
+     *          description="An index of all stages' game data",
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(
      *                  property="_links",
-     *                  ref="#/components/schemas/links_index"
+     *                  ref="#/components/schemas/links_index",
      *              ),
      *              @OA\Property(
      *                  property="_embedded",
      *                  type="object",
      *                  @OA\Property(
-     *                      property="stages",
+     *                      property="gameData",
      *                      type="array",
-     *                      @OA\Items(ref="#/components/schemas/stage_summary"),
+     *                      @OA\Items(
+     *                          type="object",
+     *                          @OA\Property(
+     *                              property="_links",
+     *                              ref="#/components/schemas/links",
+     *                          ),
+     *                          @OA\Property(
+     *                              property="id",
+     *                              ref="#/components/schemas/id",
+     *                          ),
+     *                          @OA\Property(
+     *                              property="name",
+     *                              ref="#/components/schemas/name",
+     *                          ),
+     *                      ),
      *                  ),
      *              ),
      *          ),
@@ -47,7 +61,7 @@ class StageGameDataController extends Controller
      * )
      */
     public function index() {
-        return new StageCollection(StageClassification::all());
+        return new StageGameDataCollection(StageGameData::all());
     }
 
     /**
