@@ -2,12 +2,14 @@
 
 namespace App\Http\Api\Controllers;
 
+use App\Exceptions\ResourceNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StageClassificationResource;
 use App\Http\Resources\StageClassificationCollection;
 use App\Models\StageClassification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class StageClassificationController extends Controller
@@ -41,8 +43,12 @@ class StageClassificationController extends Controller
      *          ),
      *      ),
      *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error occured",
+     *          response=404,
+     *          ref="#/components/responses/resource_not_found",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          ref="#/components/responses/server_error",
      *      ),
      * )
      */
@@ -74,12 +80,20 @@ class StageClassificationController extends Controller
      *          ),
      *      ),
      *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error occured",
+     *          response=404,
+     *          ref="#/components/responses/resource_not_found",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          ref="#/components/responses/server_error",
      *      ),
      * )
      */
-    public function show(StageClassification $classification) {
+    public function show(Request $request, string $id) {
+        $classification = StageClassification::find($id);
+        if (!$classification) {
+            throw new ResourceNotFoundException();
+        }
         return new StageClassificationResource($classification);
     }
 }

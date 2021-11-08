@@ -2,6 +2,7 @@
 
 namespace App\Http\Api\Controllers;
 
+use App\Exceptions\ResourceNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StageResource;
 use App\Http\Resources\StageCollection;
@@ -9,10 +10,13 @@ use App\Models\StageClassification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 
 class StageController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function __construct() { }
 
     /**
      * @OA\Get(
@@ -61,8 +65,12 @@ class StageController extends Controller
      *          ),
      *      ),
      *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error occured",
+     *          response=404,
+     *          ref="#/components/responses/resource_not_found",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          ref="#/components/responses/server_error",
      *      ),
      * )
      */
@@ -91,12 +99,22 @@ class StageController extends Controller
      *          @OA\JsonContent(ref="#/components/schemas/stage"),
      *      ),
      *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error occured",
+     *          response=404,
+     *          ref="#/components/responses/resource_not_found",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          ref="#/components/responses/server_error",
      *      ),
      * )
      */
-    public function show(StageClassification $stage) {
-        return new StageResource($stage);
+    public function show(Request $request, string $id) {
+        $stage = StageClassification::find($id);
+        if (!$stage) {
+            throw new ResourceNotFoundException();
+        } else {
+            $resource = new StageResource($stage);
+        }
+        return $resource;
     }
 }

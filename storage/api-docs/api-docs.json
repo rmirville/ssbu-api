@@ -48,8 +48,11 @@
                             }
                         }
                     },
-                    "default": {
-                        "description": "Unexpected error occured"
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
                     }
                 }
             }
@@ -81,8 +84,11 @@
                             }
                         }
                     },
-                    "default": {
-                        "description": "Unexpected error occured"
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
                     }
                 }
             }
@@ -136,8 +142,11 @@
                             }
                         }
                     },
-                    "default": {
-                        "description": "Unexpected error occured"
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
                     }
                 }
             }
@@ -169,8 +178,11 @@
                             }
                         }
                     },
-                    "default": {
-                        "description": "Unexpected error occured"
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
                     }
                 }
             }
@@ -218,8 +230,11 @@
                             }
                         }
                     },
-                    "default": {
-                        "description": "Unexpected error occured"
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
                     }
                 }
             }
@@ -251,8 +266,11 @@
                             }
                         }
                     },
-                    "default": {
-                        "description": "Unexpected error occured"
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
                     }
                 }
             }
@@ -289,8 +307,11 @@
                             }
                         }
                     },
-                    "default": {
-                        "description": "Unexpected error occured"
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
                     }
                 }
             }
@@ -322,8 +343,11 @@
                             }
                         }
                     },
-                    "default": {
-                        "description": "Unexpected error occured"
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
                     }
                 }
             }
@@ -378,6 +402,36 @@
                         "type": "object"
                     }
                 ]
+            },
+            "error": {
+                "properties": {
+                    "status": {
+                        "type": "number"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "error_response": {
+                "properties": {
+                    "_links": {
+                        "properties": {
+                            "home": {
+                                "$ref": "#/components/schemas/link"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "_error": {
+                        "$ref": "#/components/schemas/error"
+                    }
+                },
+                "type": "object"
             },
             "id": {
                 "type": "string"
@@ -614,6 +668,38 @@
                     }
                 },
                 "type": "object"
+            }
+        },
+        "responses": {
+            "endpoint_not_found": {
+                "description": "Requested endpoint not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error_response"
+                        }
+                    }
+                }
+            },
+            "resource_not_found": {
+                "description": "Requested resource not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error_response"
+                        }
+                    }
+                }
+            },
+            "server_error": {
+                "description": "Unexpected error occured",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error_response"
+                        }
+                    }
+                }
             }
         }
     },

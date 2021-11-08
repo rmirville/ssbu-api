@@ -2,6 +2,7 @@
 
 namespace App\Http\Api\Controllers;
 
+use App\Exceptions\ResourceNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StageGameDataResource;
 use App\Http\Resources\StageGameDataCollection;
@@ -9,6 +10,7 @@ use App\Models\StageGameData;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 
 class StageGameDataController extends Controller
 {
@@ -55,8 +57,12 @@ class StageGameDataController extends Controller
      *          ),
      *      ),
      *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error occured",
+     *          response=404,
+     *          ref="#/components/responses/resource_not_found",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          ref="#/components/responses/server_error",
      *      ),
      * )
      */
@@ -85,12 +91,20 @@ class StageGameDataController extends Controller
      *          @OA\JsonContent(ref="#/components/schemas/stage_game_data"),
      *      ),
      *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error occured",
+     *          response=404,
+     *          ref="#/components/responses/resource_not_found",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          ref="#/components/responses/server_error",
      *      ),
      * )
      */
-    public function show(StageGameData $stage) {
+    public function show(Request $request, string $id) {
+        $stage = StageGameData::find($id);
+        if (!$stage) {
+            throw new ResourceNotFoundException();
+        }
         return new StageGameDataResource($stage);
     }
 }

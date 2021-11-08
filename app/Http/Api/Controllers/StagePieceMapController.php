@@ -2,6 +2,7 @@
 
 namespace App\Http\Api\Controllers;
 
+use App\Exceptions\ResourceNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StagePieceMapResource;
 use App\Http\Resources\StagePieceMapCollection;
@@ -9,6 +10,7 @@ use App\Models\StagePieceMap;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 
 class StagePieceMapController extends Controller
 {
@@ -41,8 +43,12 @@ class StagePieceMapController extends Controller
      *          ),
      *      ),
      *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error occured",
+     *          response=404,
+     *          ref="#/components/responses/resource_not_found",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          ref="#/components/responses/server_error",
      *      ),
      * )
      */
@@ -72,12 +78,20 @@ class StagePieceMapController extends Controller
      *          @OA\JsonContent(ref="#/components/schemas/stage_piece_map"),
      *      ),
      *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error occured",
+     *          response=404,
+     *          ref="#/components/responses/resource_not_found",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          ref="#/components/responses/server_error",
      *      ),
      * )
      */
-    public function show(StagePieceMap $pieceMap) {
+    public function show(Request $request, string $id) {
+        $pieceMap = StagePieceMap::find($id);
+        if (!$pieceMap) {
+            throw new ResourceNotFoundException();
+        }
         return new StagePieceMapResource($pieceMap);
     }
 }

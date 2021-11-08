@@ -36,7 +36,6 @@ class Controller
      *          type="object",
      *          @OA\Property(
      *              property="self",
-     *              type="object",
      *              ref="#/components/schemas/link",
      *          ),
      *      ),
@@ -65,6 +64,38 @@ class Controller
      *                  ),
      *              ),
      *          },
+     *      ),
+     *      @OA\Schema(
+     *          schema="error",
+     *          type="object",
+     *          @OA\Property(
+     *              property="status",
+     *              type="number",
+     *          ),
+     *          @OA\Property(
+     *              property="type",
+     *              type="string",
+     *          ),
+     *          @OA\Property(
+     *              property="message",
+     *              type="string",
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="error_response",
+     *          type="object",
+     *          @OA\Property(
+     *              property="_links",
+     *              type="object",
+     *              @OA\Property(
+     *                  property="home",
+     *                  ref="#/components/schemas/link",
+     *              ),
+     *          ),
+     *          @OA\Property(
+     *              property="_error",
+     *              ref="#/components/schemas/error",
+     *          ),
      *      ),
      *      @OA\Schema(
      *          schema="id",
@@ -316,6 +347,21 @@ class Controller
      *              property="id",
      *              ref="#/components/schemas/id",
      *          ),
+     *      ),
+     *      @OA\Response(
+     *          response="endpoint_not_found",
+     *          description="Requested endpoint not found",
+     *          @OA\JsonContent(ref="#/components/schemas/error_response"),
+     *      ),
+     *      @OA\Response(
+     *          response="resource_not_found",
+     *          description="Requested resource not found",
+     *          @OA\JsonContent(ref="#/components/schemas/error_response"),
+     *      ),
+     *      @OA\Response(
+     *          response="server_error",
+     *          description="Unexpected error occured",
+     *          @OA\JsonContent(ref="#/components/schemas/error_response"),
      *      ),
      * ),
      */

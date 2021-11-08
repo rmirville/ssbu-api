@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Exceptions;
-
-use CloudCreativity\LaravelJsonApi\Exceptions\HandlesErrors;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
+use Illuminate\Http\Request;
 
 class Handler extends ExceptionHandler
 {
@@ -28,6 +29,19 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    protected $links;
+
+    function __construct(Container $container) {
+        parent::__construct($container);
+        $this->links = [
+            '_links' => [
+                'home' => [
+                    'href' => env('SSBUTOOLS_API_HOST') . '/stages',
+                ],
+            ],
+        ];
+    }
+
     /**
      * Register the exception handling callbacks for the application.
      *
@@ -35,8 +49,35 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (NotFoundHttpException $e, Request $request) {
+            return response()->json(
+                array_merge(
+                    $this->links,
+                    [
+                        '_error' => [
+                            'status' => 404,
+                            'type' => 'ENDPOINT_NOT_FOUND',
+                            'message' => 'The requested endpoint could not be found.',
+                        ],
+                    ],
+                ),
+                404
+            );
+        });
+        $this->renderable(function (ModelNotFoundException $e, Request $request) {
+            return response()->json(
+                array_merge(
+                    $this->links,
+                    [
+                        '_error' => [
+                            'status' => 404,
+                            'type' => 'RESOURCE_NOT_FOUND',
+                            'message' => 'The requested resource could not be found.',
+                        ],
+                    ],
+                ),
+                404
+            );
         });
     }
 }
