@@ -36,8 +36,8 @@ return [
     'connections' => [
 
         'mongodb' => [
-            'driver' => 'mongodb',
-            'host' => [env('SSBUTOOLS_DB_MONGO_R_HOST_1'), env('SSBUTOOLS_DB_MONGO_R_HOST_2'), env('SSBUTOOLS_DB_MONGO_R_HOST_3')],
+            'driver' => env('SSBUTOOLS_DB_MONGO_R_DRIVER', 'mongodb'),
+            'host' => env('SSBUTOOLS_DB_MONGO_R_HOST'),
             'port' => env('SSBUTOOLS_DB_MONGO_R_PORT'),
             'database' => env('SSBUTOOLS_DB_MONGO_R_DB'),
             'username' => env('SSBUTOOLS_DB_MONGO_R_USER'),
