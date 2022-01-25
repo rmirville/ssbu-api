@@ -37,16 +37,13 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'host' => [env('SSBUTOOLS_DB_MONGO_R_HOST_1'), env('SSBUTOOLS_DB_MONGO_R_HOST_2'), env('SSBUTOOLS_DB_MONGO_R_HOST_3')],
+            'host' => env('SSBUTOOLS_DB_MONGO_R_HOST'),
             'port' => env('SSBUTOOLS_DB_MONGO_R_PORT'),
             'database' => env('SSBUTOOLS_DB_MONGO_R_DB'),
             'username' => env('SSBUTOOLS_DB_MONGO_R_USER'),
             'password' => env('SSBUTOOLS_DB_MONGO_R_SECRET'),
             'options' => [
-                'authSource' => env('SSBUTOOLS_DB_MONGO_R_AUTH_DB'),
-                'compressors' => env('SSBUTOOLS_DB_MONGO_R_COMPRESSORS'),
-                'readPreference' => env('SSBUTOOLS_DB_MONGO_R_READ_PREF'),
-                'replicaSet' => env('SSBUTOOLS_DB_MONGO_R_REPLICA_SET'),
+                'tlsCAFile' => env('SSBUTOOLS_DB_MONGO_R_TLS_CA_FILE'),
             ],
         ],
 
