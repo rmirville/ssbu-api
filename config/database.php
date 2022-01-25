@@ -37,14 +37,8 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'host' => env('SSBUTOOLS_DB_MONGO_R_HOST'),
-            'port' => env('SSBUTOOLS_DB_MONGO_R_PORT'),
+            'dsn' => env('SSBUTOOLS_DB_MONGO_R_URL'),
             'database' => env('SSBUTOOLS_DB_MONGO_R_DB'),
-            'username' => env('SSBUTOOLS_DB_MONGO_R_USER'),
-            'password' => env('SSBUTOOLS_DB_MONGO_R_SECRET'),
-            'options' => [
-                'tlsCAFile' => env('SSBUTOOLS_DB_MONGO_R_TLS_CA_FILE'),
-            ],
         ],
 
         'sqlite' => [
