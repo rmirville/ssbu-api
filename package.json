@@ -1,7 +1,10 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
+        "build:docs": "php artisan l5-swagger:generate",
+        "start:doc": "echo http://localhost:8000/documentation",
+        "start:docs": "npm run start:doc",
+        "start:dev": "php artisan serve",
         "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
