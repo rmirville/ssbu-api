@@ -169,13 +169,8 @@ class Controller
      *          }
      *      ),
      *      @OA\Schema(
-     *          schema="stage_classification",
+     *          schema="stage_classification_base",
      *          type="object",
-     *          description="The collection of descriptors of a stage",
-     *          @OA\Property(
-     *              property="_links",
-     *              ref="#/components/schemas/links_stage",
-     *          ),
      *          @OA\Property(
      *              property="id",
      *              ref="#/components/schemas/id",
@@ -202,6 +197,56 @@ class Controller
      *              property="tourneyPresence",
      *              type="integer",
      *              description="The stage's presence in major tournaments",
+     *          ),
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_classification",
+     *          type="object",
+     *          description="The collection of descriptors of a stage",
+     *          allOf={
+     *              @OA\Schema(
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="_links",
+     *                      ref="#/components/schemas/links_stage",
+     *                  ),
+     *              ),
+     *              @OA\Schema(ref="#/components/schemas/stage_classification_base"),
+     *          }
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_classification_summary",
+     *          allOf={
+     *              @OA\Schema(
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="_links",
+     *                      ref="#/components/schemas/links",
+     *                  ),
+     *              ),
+     *              @OA\Schema(ref="#/components/schemas/stage_classification_base"),
+     *          }
+     *      ),
+     *      @OA\Schema(
+     *          schema="stage_classification_set",
+     *          type="object",
+     *          description="A set of stages' classifications",
+     *          @OA\Property(
+     *              property="_links",
+     *              ref="#/components/schemas/links_index",
+     *          ),
+     *          @OA\Property(
+     *              property="id",
+     *              ref="#/components/schemas/id",
+     *          ),
+     *          @OA\Property(
+     *              property="_embedded",
+     *              type="object",
+     *              @OA\Property(
+     *                  property="classifications",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/stage_classification_summary"),
+     *              ),
      *          ),
      *      ),
      *      @OA\Schema(
