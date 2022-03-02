@@ -25,9 +25,9 @@ Route::group([
   Route::get('/', [StageController::class, 'index']);
   Route::get('/classifications', [StageClassificationController::class, 'index']);
   Route::get('/game-data', [StageGameDataController::class, 'index']);
+  Route::resource('classification-sets', 'StageClassificationSetController')->only(['index', 'show']);
   Route::resource('piece-maps', 'StagePieceMapController')->only(['index', 'show']);
   Route::get('/{stage}', [StageController::class, 'show']);
   Route::get('/{classification}/classifications', [StageClassificationController::class, 'show']);
   Route::get('/{stage}/game-data', [StageGameDataController::class, 'show']);
-  Route::get('/classification-sets/{set}', [StageClassificationSetController::class, 'show']);
 });

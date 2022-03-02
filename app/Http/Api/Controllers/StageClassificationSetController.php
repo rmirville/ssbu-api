@@ -4,6 +4,7 @@ namespace App\Http\Api\Controllers;
 
 use App\Exceptions\ResourceNotFoundException;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StageClassificationSetCollection;
 use App\Http\Resources\StageClassificationSetResource;
 use App\Models\StageClassification;
 use App\Models\StageSet;
@@ -63,7 +64,7 @@ class StageClassificationSetController extends Controller
      * )
      */
     public function index() {
-        return new StageClassificationCollection(StageClassification::all());
+        return new StageClassificationSetCollection(StageSet::all());
     }
 
     /**
