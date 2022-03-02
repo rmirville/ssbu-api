@@ -28,6 +28,17 @@ class StageClassificationResource extends JsonResource
         ];
     }
 
+    public function classificationsSummary() {
+        return array_merge(
+            $this->summary(),
+            [
+                'abbr' => $this->abbr,
+                'series' => $this->series,
+                'tourneyPresence' => $this->tourneyPresence,
+            ],
+        );
+    }
+
     public function summary() {
         return array_merge(
             [

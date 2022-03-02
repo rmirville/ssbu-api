@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Api\Controllers\StageClassificationController;
+use App\Http\Api\Controllers\StageClassificationSetController;
 use App\Http\Api\Controllers\StageController;
 use App\Http\Api\Controllers\StageGameDataController;
 
@@ -28,4 +29,5 @@ Route::group([
   Route::get('/{stage}', [StageController::class, 'show']);
   Route::get('/{classification}/classifications', [StageClassificationController::class, 'show']);
   Route::get('/{stage}/game-data', [StageGameDataController::class, 'show']);
+  Route::get('/classification-sets/{set}', [StageClassificationSetController::class, 'show']);
 });

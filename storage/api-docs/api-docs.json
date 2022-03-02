@@ -93,6 +93,91 @@
                 }
             }
         },
+        "/stages/classification-sets": {
+            "get": {
+                "summary": "Returns an index of stage classification sets",
+                "description": "Returns all of stage classification sets",
+                "operationId": "classificationSetsIndex",
+                "responses": {
+                    "200": {
+                        "description": "An index of all stage classification sets",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "_links": {
+                                            "$ref": "#/components/schemas/links_index"
+                                        },
+                                        "_embedded": {
+                                            "properties": {
+                                                "classificationSets": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "_links": {
+                                                                "$ref": "#/components/schemas/links"
+                                                            },
+                                                            "id": {
+                                                                "$ref": "#/components/schemas/id"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
+                    }
+                }
+            }
+        },
+        "/stages/classification-sets/{set-name}": {
+            "get": {
+                "summary": "Returns a set of classifications",
+                "description": "Returns a set of classifications",
+                "operationId": "classificationSetsShow",
+                "parameters": [
+                    {
+                        "name": "set-name",
+                        "in": "path",
+                        "description": "Name of classification set",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A set of classifications",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/stage_classification_set"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/resource_not_found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/server_error"
+                    }
+                }
+            }
+        },
         "/stages": {
             "get": {
                 "summary": "Returns an index of stages",
@@ -502,12 +587,8 @@
                     }
                 ]
             },
-            "stage_classification": {
-                "description": "The collection of descriptors of a stage",
+            "stage_classification_base": {
                 "properties": {
-                    "_links": {
-                        "$ref": "#/components/schemas/links_stage"
-                    },
                     "id": {
                         "$ref": "#/components/schemas/id"
                     },
@@ -528,6 +609,61 @@
                     "tourneyPresence": {
                         "description": "The stage's presence in major tournaments",
                         "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "stage_classification": {
+                "description": "The collection of descriptors of a stage",
+                "type": "object",
+                "allOf": [
+                    {
+                        "properties": {
+                            "_links": {
+                                "$ref": "#/components/schemas/links_stage"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "$ref": "#/components/schemas/stage_classification_base"
+                    }
+                ]
+            },
+            "stage_classification_summary": {
+                "allOf": [
+                    {
+                        "properties": {
+                            "_links": {
+                                "$ref": "#/components/schemas/links"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "$ref": "#/components/schemas/stage_classification_base"
+                    }
+                ]
+            },
+            "stage_classification_set": {
+                "description": "A set of stages' classifications",
+                "properties": {
+                    "_links": {
+                        "$ref": "#/components/schemas/links_index"
+                    },
+                    "id": {
+                        "$ref": "#/components/schemas/id"
+                    },
+                    "_embedded": {
+                        "properties": {
+                            "classifications": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/stage_classification_summary"
+                                }
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
