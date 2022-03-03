@@ -63,12 +63,10 @@ class StageClassificationSetResource extends ResourceCollection
                 $this->link('self'),
                 $this->link('index'),
             ),
-            '_embedded' => [
-                'classifications' => $this->collection->map(function ($item) {
-                        return $item->classificationsSummary();
-                    }
-                ),
-            ],
+            'classifications' => $this->collection->map(function ($item) {
+                    return $item->classificationsSummary();
+                }
+            ),
         ];
     }
 }

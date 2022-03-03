@@ -30,7 +30,7 @@ class StageClassificationResource extends JsonResource
 
     public function classificationsSummary() {
         return array_merge(
-            $this->summary(),
+            $this->baseProperties(),
             [
                 'abbr' => $this->abbr,
                 'series' => $this->series,
@@ -43,6 +43,7 @@ class StageClassificationResource extends JsonResource
         return array_merge(
             [
                 '_links' => $this->link('self'),
+                'id' => $this->id,
             ],
             $this->baseProperties(),
         );
@@ -50,7 +51,6 @@ class StageClassificationResource extends JsonResource
 
     public function baseProperties() {
         return [
-            'id' => $this->id,
             'gameName' => $this->gameName,
             'name' => $this->name,
         ];
@@ -71,13 +71,9 @@ class StageClassificationResource extends JsonResource
                     $this->link('index'),
                     $this->link('stage'),
                 ),
+                'id' => $this->id,
             ],
-            $this->baseProperties(),
-            [
-                'abbr' => $this->abbr,
-                'series' => $this->series,
-                'tourneyPresence' => $this->tourneyPresence,
-            ]
+            $this->classificationsSummary(),
         );
     }
 }
