@@ -3,12 +3,11 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
-
-use App\Models\StageSet;
+use App\Http\Resources\StageSetResource;
 
 class StageClassificationSetCollection extends ResourceCollection
 {
-    public $collects = StageSet::class;
+    public $collects = StageSetResource::class;
     public $preserveKeys = true;
 
     /**
