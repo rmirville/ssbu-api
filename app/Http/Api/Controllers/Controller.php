@@ -172,10 +172,6 @@ class Controller
      *          schema="stage_classification_base",
      *          type="object",
      *          @OA\Property(
-     *              property="id",
-     *              ref="#/components/schemas/id",
-     *          ),
-     *          @OA\Property(
      *              property="gameName",
      *              ref="#/components/schemas/game_name",
      *          ),
@@ -210,6 +206,10 @@ class Controller
      *                      property="_links",
      *                      ref="#/components/schemas/links_stage",
      *                  ),
+     *                  @OA\Property(
+     *                      property="id",
+     *                      ref="#/components/schemas/id",
+     *                  ),
      *              ),
      *              @OA\Schema(ref="#/components/schemas/stage_classification_base"),
      *          }
@@ -222,6 +222,10 @@ class Controller
      *                  @OA\Property(
      *                      property="_links",
      *                      ref="#/components/schemas/links",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="id",
+     *                      ref="#/components/schemas/id",
      *                  ),
      *              ),
      *              @OA\Schema(ref="#/components/schemas/stage_classification_base"),
@@ -240,13 +244,9 @@ class Controller
      *              ref="#/components/schemas/id",
      *          ),
      *          @OA\Property(
-     *              property="_embedded",
+     *              property="classifications",
      *              type="object",
-     *              @OA\Property(
-     *                  property="classifications",
-     *                  type="array",
-     *                  @OA\Items(ref="#/components/schemas/stage_classification_summary"),
-     *              ),
+     *              @OA\AdditionalProperties(ref="#/components/schemas/stage_classification_base"),
      *          ),
      *      ),
      *      @OA\Schema(

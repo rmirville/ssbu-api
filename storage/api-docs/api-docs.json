@@ -589,9 +589,6 @@
             },
             "stage_classification_base": {
                 "properties": {
-                    "id": {
-                        "$ref": "#/components/schemas/id"
-                    },
                     "gameName": {
                         "$ref": "#/components/schemas/game_name"
                     },
@@ -621,6 +618,9 @@
                         "properties": {
                             "_links": {
                                 "$ref": "#/components/schemas/links_stage"
+                            },
+                            "id": {
+                                "$ref": "#/components/schemas/id"
                             }
                         },
                         "type": "object"
@@ -636,6 +636,9 @@
                         "properties": {
                             "_links": {
                                 "$ref": "#/components/schemas/links"
+                            },
+                            "id": {
+                                "$ref": "#/components/schemas/id"
                             }
                         },
                         "type": "object"
@@ -654,16 +657,11 @@
                     "id": {
                         "$ref": "#/components/schemas/id"
                     },
-                    "_embedded": {
-                        "properties": {
-                            "classifications": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/stage_classification_summary"
-                                }
-                            }
-                        },
-                        "type": "object"
+                    "classifications": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/stage_classification_base"
+                        }
                     }
                 },
                 "type": "object"

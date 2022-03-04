@@ -58,15 +58,21 @@ class StageClassificationSetResource extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            '_links' => array_merge(
-                $this->link('self'),
-                $this->link('index'),
-            ),
-            'classifications' => $this->collection->map(function ($item) {
-                    return $item->classificationsSummary();
-                }
-            ),
-        ];
+        return array_merge(
+            [
+                '_links' => array_merge(
+                    $this->link('self'),
+                    $this->link('index'),
+                ),
+            ],
+            $this->baseProperties(),
+            [
+                'classifications' => array_merge($this->collection->mapWithKeys(function ($item) {
+                        $summary = $item->classificationsSummary();
+                        return [$item->gameName => $summary];
+                    })->all()
+                ),
+            ],
+        );
     }
 }
